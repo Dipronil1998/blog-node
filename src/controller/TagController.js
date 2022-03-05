@@ -69,3 +69,17 @@ exports.update = async (req, res) => {
     res.status(404).send(error);
   }
 };
+
+exports.delete=async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const tag = await Tag.findByIdAndDelete({'_id': _id});
+    if (!tag) {
+      res.status(400).json({ message: message.dataNotFound });
+    } else {
+      res.status(200).json({"message":"Tag Delete Successfully"});
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}

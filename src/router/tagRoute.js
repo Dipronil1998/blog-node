@@ -30,17 +30,6 @@ router.get('/:id', verifyTokenAndAdmin, tagController.getOne);
 router.put('/:id', verifyTokenAndAdmin, tagValidator.updateTagValidator,validateResult,tagController.update);
 
 // // DELETE data
-// router.delete('/category/:id', async (req, res) => {
-//   try {
-//     const _id = req.params.id;
-//     const category = await Category.findByIdAndDelete({'_id': _id});
-//     if (!category) {
-//       res.status(404).send();
-//     } else {
-//       res.status(200).send(category);
-//     }
-//   } catch (error) {
-//     res.status(500).send(error);
-//   }
-// });
+router.delete('/:id', verifyTokenAndAdmin,tagController.delete);
+
 module.exports=router;
