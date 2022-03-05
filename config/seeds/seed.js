@@ -1,0 +1,4 @@
+require('./SeedUser');
+require('./SeedRole');
+
+
