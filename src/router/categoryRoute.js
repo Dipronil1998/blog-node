@@ -34,8 +34,9 @@ const validateResult=(req, res, next)=>{
 };
 
 // create operation
-router.post('', verifyToken, upload.single('image'), categoryValidator.createCategoryValidator, validateResult, imageValidate,
-    categoryController.create);
+router.post('', verifyToken, upload.single('image'),
+    categoryValidator.createCategoryValidator,
+    validateResult, imageValidate, categoryController.create);
 
 
 // read all data

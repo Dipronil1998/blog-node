@@ -1,22 +1,22 @@
 const express = require('express');
 const router= new express.Router();
 const tagController=require('../controller/TagController');
-const {verifyToken,verifyTokenAndAdmin} = require('../middleware/verifytoken');
+const {verifyTokenAndAdmin} = require('../middleware/verifytoken');
 const tagValidator=require('../validator/TagValidation');
 const {validationResult} = require('express-validator');
 
 
 const validateResult=(req, res, next)=>{
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({'error': errors.array()[0].msg});
-    }
-    next();
-  };
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({'error': errors.array()[0].msg});
+  }
+  next();
+};
 
 // create operation
-router.post('', verifyTokenAndAdmin, tagValidator.createTagValidator,validateResult,
-    tagController.create);
+router.post('', verifyTokenAndAdmin, tagValidator.createTagValidator,
+    validateResult, tagController.create);
 
 
 // read all data
@@ -27,9 +27,10 @@ router.get('/:id', verifyTokenAndAdmin, tagController.getOne);
 
 
 // update data by PATCH method by ID
-router.put('/:id', verifyTokenAndAdmin, tagValidator.updateTagValidator,validateResult,tagController.update);
+router.put('/:id', verifyTokenAndAdmin, tagValidator.updateTagValidator,
+    validateResult, tagController.update);
 
 // // DELETE data
-router.delete('/:id', verifyTokenAndAdmin,tagController.delete);
+router.delete('/:id', verifyTokenAndAdmin, tagController.delete);
 
 module.exports=router;
