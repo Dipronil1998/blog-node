@@ -1,5 +1,4 @@
 const Category = require('../model/category');
-const {validationResult} = require('express-validator');
 const message = require('../../config/constant');
 
 exports.create = async (req, res) => {

@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./src/index.js",
     "seed": "node ./config/seeds/seed.js && exit 1",
-    "lient": "./node_modules/.bin/eslint ./src/index.js ./src/**/**.js ./config/**.js ./config/seeds/**.js --fix"
+    "lint": "./node_modules/.bin/eslint ./src/index.js ./src/**/**.js ./config/**.js ./config/seeds/**.js --fix"
   },
   "keywords": [],
   "author": "",

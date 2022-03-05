@@ -1,4 +1,4 @@
-const {body, check} = require('express-validator');
+const {check} = require('express-validator');
 
 exports.createCategoryValidator=[
   check('name').isString().withMessage('Category name should be alphabetic')
