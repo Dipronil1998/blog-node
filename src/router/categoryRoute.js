@@ -2,7 +2,7 @@ const express = require('express');
 const router= new express.Router();
 router.use(express.json({}));
 const categoryController=require('../controller/CategoryController');
-const {verifyToken} = require('../middleware/verifytoken');
+const {verifyTokenAndAdmin} = require('../middleware/verifytoken');
 const categoryValidator=require('../validator/CategoryValidation');
 const {validationResult} = require('express-validator');
 const {imageValidate}=require('../middleware/ImageValidator');
@@ -34,43 +34,24 @@ const validateResult=(req, res, next)=>{
 };
 
 // create operation
-router.post('', verifyToken, upload.single('image'),
+router.post('', verifyTokenAndAdmin, upload.single('image'),
     categoryValidator.createCategoryValidator,
     validateResult, imageValidate, categoryController.create);
 
 
 // read all data
-router.get('', verifyToken, categoryController.get);
+router.get('', verifyTokenAndAdmin, validateResult, categoryController.get);
 
 // read particualr data
-router.get('/:id', verifyToken, categoryController.getOne);
+router.get('/:id', verifyTokenAndAdmin, validateResult,
+    categoryController.getOne);
 
 
 // update data by PATCH method by ID
-router.patch('/category/:id', async (req, res) => {
-  try {
-    const _id = req.params.id;
-    const category = await Category.findByIdAndUpdate({'_id': _id}, req.body, {
-      new: true,
-    });
-    res.send(category);
-  } catch (error) {
-    res.status(404).send(error);
-  }
-});
+router.put('/:id', verifyTokenAndAdmin, upload.single('image'),
+    categoryValidator.updateCategoryValidator, validateResult,
+    imageValidate, categoryController.update);
 
 // DELETE data
-router.delete('/category/:id', async (req, res) => {
-  try {
-    const _id = req.params.id;
-    const category = await Category.findByIdAndDelete({'_id': _id});
-    if (!category) {
-      res.status(404).send();
-    } else {
-      res.status(200).send(category);
-    }
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
+router.delete('/:id', verifyTokenAndAdmin, categoryController.delete);
 module.exports=router;
