@@ -9,6 +9,7 @@ const {imageValidate}=require('../middleware/ImageValidator');
 
 
 const multer = require('multer');
+let upload = multer({dest: './asset/image/category/'});
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, './asset/image/category/');
@@ -18,7 +19,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({
+upload = multer({
   storage: storage,
   limits: {
     fileSize: 1024 * 1024 * 2, // 2 mb file

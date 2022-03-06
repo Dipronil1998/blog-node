@@ -73,16 +73,16 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.delete=async (req, res) => {
+exports.delete = async (req, res) => {
   try {
     const _id = req.params.id;
-    const category = await Category.findByIdAndDelete({'_id': _id});
+    const category = await Category.findByIdAndDelete({_id: _id});
     if (!category) {
       res.status(400).json({message: message.dataNotFound});
     } else {
-      const path=category.image;
+      const path = category.image;
       fs.unlinkSync(path);
-      res.status(200).json({'message': 'Category Delete Successfully'});
+      res.status(200).json({message: 'Category Delete Successfully'});
     }
   } catch (error) {
     res.status(500).send(error);
