@@ -68,7 +68,7 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE5ZWVjNzkxY2MyNTAzOTBkMjY3ZDEiLCJpc0FkbWluIjoyLCJpYXQiOjE2NDYxOTMyNjAsImV4cCI6MTY0NjE5Njg2MH0.7obgplpaiRRSG7U-NXkE5UBKI9WWrAZ8n1WLlugAoRQ",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY1Njc0OTMsImV4cCI6MTY0NjU3MTA5M30.HoKltDGGO9ANShKyEIuVKJAoPFbMgItw1GOBDq9PPtE",
 						"type": "text"
 					},
 					{
@@ -83,13 +83,13 @@
 					"formdata": [
 						{
 							"key": "name",
-							"value": " sports",
+							"value": "Politics",
 							"type": "text"
 						},
 						{
 							"key": "image",
 							"type": "file",
-							"src": "/home/dipronil/Pictures/person.jpeg"
+							"src": "/home/dipronil/Pictures/God-Images-Download-87.jpg"
 						}
 					]
 				},
@@ -137,19 +137,19 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE5ZWVjNzkxY2MyNTAzOTBkMjY3ZDEiLCJpc0FkbWluIjoyLCJpYXQiOjE2NDU4ODUxODcsImV4cCI6MTY0NTg4ODc4N30.6y8p-ulNodsv02f9zpX3pJW5E0ovJW9tEaqYuUvijX8",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY1Njc0OTMsImV4cCI6MTY0NjU3MTA5M30.HoKltDGGO9ANShKyEIuVKJAoPFbMgItw1GOBDq9PPtE",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/category/621a28de2c599533a2dcc04f",
+					"raw": "localhost:3000/category/621a38fbf3f824ece44868ce",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"category",
-						"621a28de2c599533a2dcc04f"
+						"621a38fbf3f824ece44868ce"
 					]
 				}
 			},
@@ -366,6 +366,71 @@
 						"resetpassword",
 						"62237c0b16317d678e1974ca",
 						"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJpYXQiOjE2NDY0OTQxMzIsImV4cCI6MTY0NjQ5NTAzMn0.iqsVIlOgDF5K_gHai9jQsJvMTzTP_xNZ0EAIyFybrzA"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Category",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY1Njc0OTMsImV4cCI6MTY0NjU3MTA5M30.HoKltDGGO9ANShKyEIuVKJAoPFbMgItw1GOBDq9PPtE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Inter",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/home/dipronil/Pictures/person.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/category/6224a6c6e36775ea85554b4f",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"category",
+						"6224a6c6e36775ea85554b4f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Category",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY1NzIxMDksImV4cCI6MTY0NjU3NTcwOX0.sp3XPUgH2luokIkOLsIOPlYsb_RQ4r15kJp0nf11hxM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/category/6224b25fe94feb5285edea8e",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"category",
+						"6224b25fe94feb5285edea8e"
 					]
 				}
 			},

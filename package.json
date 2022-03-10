@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./src/index.js",
-    "seed": "node ./config/seeds/seed.js && exit 1",
+    "seed": "node ./config/seeds/seed.js",
     "lint-fix": "./node_modules/.bin/eslint ./src/index.js ./src/**/**.js ./config/**.js ./config/seeds/**.js --fix",
     "lint": "./node_modules/.bin/eslint ./src/index.js ./src/**/**.js ./config/**.js ./config/seeds/**.js"
   },
@@ -26,7 +26,8 @@
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
     "validator": "^13.7.0",
-    "valitor": "^0.0.1"
+    "valitor": "^0.0.1",
+    "winston": "^3.6.0"
   },
   "devDependencies": {
     "eslint": "^8.9.0",

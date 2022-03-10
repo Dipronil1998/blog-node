@@ -5,7 +5,7 @@ const categoryController=require('../controller/CategoryController');
 const {verifyTokenAndAdmin} = require('../middleware/verifytoken');
 const categoryValidator=require('../validator/CategoryValidation');
 const {validationResult} = require('express-validator');
-const {imageValidate}=require('../middleware/ImageValidator');
+const {imageValidate,imageValidateUpdate}=require('../middleware/ImageValidator');
 
 
 const multer = require('multer');
@@ -49,10 +49,11 @@ router.get('/:id', verifyTokenAndAdmin, validateResult,
 
 
 // update data by PATCH method by ID
-router.put('/:id', verifyTokenAndAdmin, upload.single('image'),
-    categoryValidator.updateCategoryValidator, validateResult,
-    imageValidate, categoryController.update);
+// router.put('/:id', verifyTokenAndAdmin, upload.single('image'),
+//     categoryValidator.updateCategoryValidator, validateResult,
+//     imageValidateUpdate, categoryController.update);
 
 // DELETE data
 router.delete('/:id', verifyTokenAndAdmin, categoryController.delete);
+
 module.exports=router;

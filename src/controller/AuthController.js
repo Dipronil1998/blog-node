@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const message = require('../../config/constant');
 const {validationResult} = require('express-validator');
 const sendMail=require('../middleware/mail');
+const logger= require('../utils/logger');
 
 exports.signUp = async (req, res) => {
   try {
@@ -23,11 +24,14 @@ exports.signUp = async (req, res) => {
       });
       await user.save();
       res.status(201).json({success: message.createSuccessfull});
+      logger.info(message.createSuccessfull);
     } else {
       res.status(400).json({error: message.passwordMismatched});
+      logger.error(message.passwordMismatched);
     }
   } catch (error) {
     res.status(400).json(error);
+    logger.error(error);
   }
 };
 
@@ -48,14 +52,18 @@ exports.logIn = async (req, res) => {
         res
             .status(200)
             .json({success: message.loginSuccessfully, token: token});
+        logger.info(message.loginSuccessfully)
       } else {
         res.status(400).json({error: message.invalidCredientials});
+        logger.error(message.invalidCredientials)
       }
     } else {
       res.json({error: message.userNotExists});
+      logger.error(message.userNotExists)
     }
   } catch (error) {
     res.json({error: 'Invalid Email/Password'});
+    logger.error('Invalid Email/Password')
   }
 };
 
@@ -70,7 +78,7 @@ exports.sendUserPasswordResetEmail=async (req, res) => {
           expiresIn: '15m',
         });
         const link = `http://127.0.0.1:3000/api/user/reset/${user._id}/${token}`;
-        console.log(link);
+        // console.log(link);
         sendMail({
           from: process.env.EMAIL,
           to: user.email,
@@ -81,14 +89,17 @@ exports.sendUserPasswordResetEmail=async (req, res) => {
         res.send({
           message: 'Password Reset Email Sent... Please Check Your Email',
         });
+        logger.info('Password Reset Email Sent... Please Check Your Email');
       } else {
         res.send({message: 'Email doesn\'t exists'});
+        logger.error('Email doesn\'t exists')
       }
     } else {
       res.send({message: 'Email Field is Required'});
     }
   } catch (error) {
     res.json({error: 'Something Wrong'});
+    logger.error('Something Wrong')
   }
 };
 

@@ -1,5 +1,6 @@
 require('dotenv').config({path: './config/.env'});
 const express = require('express');
+const logger= require('./utils/logger');
 
 require('./db/conn'); // database connection
 
@@ -33,4 +34,5 @@ app.use('/tag/', tagRouter);
 
 app.listen(port, () => {
   console.log(`Server is run: ${port}`);
+  logger.info(`Server is run: ${port}`);
 });
