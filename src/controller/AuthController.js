@@ -122,12 +122,13 @@ exports.userPasswordReset=async (req, res) => {
           $set: {password: newHashPassword},
         });
         res.json({message: 'Password Reset Successfully'});
+        logger.info('Password Reset Successfully')
       }
     } else {
       res.json({message: 'All Fields are Required'});
     }
   } catch (error) {
-    console.log(error);
+    looger.error('Invalid Token')
     res.send({message: 'Invalid Token'});
   }
 };
