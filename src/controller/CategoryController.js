@@ -1,10 +1,11 @@
 const Category = require('../model/category');
 const message = require('../../config/constant');
+const fs = require('fs');
 
 exports.create = async (req, res) => {
   try {
     const name = req.body.name;
-    const image=req.file.path;
+    const image = req.file.path;
     const slug = name.toLowerCase();
     const getCategory = await Category.findOne({slug: slug});
     if (!getCategory) {
@@ -26,8 +27,8 @@ exports.create = async (req, res) => {
 exports.get = async (req, res) => {
   try {
     const category = await Category.find();
-    if (category.length ===0) {
-      res.status(400).json({'message': message.dataNotFound});
+    if (category.length === 0) {
+      res.status(400).json({message: message.dataNotFound});
     } else {
       res.status(200).send(category);
     }
@@ -41,7 +42,7 @@ exports.getOne = async (req, res) => {
     const _id = req.params.id;
     const category = await Category.findById({_id: _id});
     if (!category) {
-      res.status(400).json({'message': message.dataNotFound});
+      res.status(400).json({message: message.dataNotFound});
     } else {
       res.status(200).send(category);
     }
@@ -50,4 +51,43 @@ exports.getOne = async (req, res) => {
   }
 };
 
+exports.update = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const getCategory = await Category.findById({_id: _id});
+    const name = req.body.name || getCategory.name;
+    const image = getCategory.image || req.file.path;
+    console.log(image);
+    const updateData = {
+      name: name,
+      slug: name.toLowerCase(),
+      image: image,
+    };
+    const category = await Category.findByIdAndUpdate({_id: _id}, updateData);
+    if (!category) {
+      res.status(400).json({message: message.dataNotFound});
+    } else {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json({message: 'Category Update Successfully'});
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(404).send(error);
+  }
+};
 
+exports.delete = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const category = await Category.findByIdAndDelete({_id: _id});
+    if (!category) {
+      res.status(400).json({message: message.dataNotFound});
+    } else {
+      const path = category.image;
+      fs.unlinkSync(path);
+      res.status(200).json({message: 'Category Delete Successfully'});
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};

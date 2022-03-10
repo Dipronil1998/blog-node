@@ -1,8 +1,5 @@
-const path = require('path');
-require('dotenv').config({path: path.resolve(__dirname, '../.env')});
 const User = require('../../src/model/user');
-// const mongoose = require('mongoose');
-require('../../src/db/conn');
+
 const users = [
   new User({
     role_id: 1,
@@ -20,7 +17,8 @@ const users = [
 
 
 users.map(async (p, index) => {
-  await User.deleteMany();
+  await User.deleteMany({name:'Mr. Admin'});
+  await User.deleteMany({name:'Mr. Author'});
   await p.save((err, result) => {
     if (index === users.length - 1) {
       console.log('User Seed Done');
