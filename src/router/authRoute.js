@@ -16,7 +16,8 @@ const validateResult=(req, res, next)=>{
 
 router.post(
     '/signup',
-    [authValidator.signInValidator],
+    authValidator.signInValidator,
+    validateResult,
     authController.signUp,
 );
 
