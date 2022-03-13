@@ -4,6 +4,9 @@ const logger= require('./utils/logger');
 
 require('./db/conn'); // database connection
 
+// var moment = require('moment'); // require
+// console.log(moment().format());
+
 
 const app = express();
 app.use(express.json({}));

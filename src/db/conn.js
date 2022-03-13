@@ -11,6 +11,6 @@ mongoose.connect(process.env.url, {
   logger.info('Connection Successfully');
 }).catch((e)=>{
   console.log('connection error');
-  logger.error('connection error')
+  logger.error('connection error');
   process.exit(1);
 });

@@ -15,8 +15,8 @@ const roles = [
 
 
 roles.map(async (p, index) => {
-  await Role.deleteMany({slug:'admin'});
-  await Role.deleteMany({slug:'author'});
+  await Role.deleteMany({slug: 'admin'});
+  await Role.deleteMany({slug: 'author'});
   await p.save((err, result) => {
     if (index === roles.length - 1) {
       console.log('Role Seed Done');

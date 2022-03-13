@@ -21,6 +21,8 @@ router.post(
     authController.signUp,
 );
 
+router.put('/verifyotp/:id', authController.verifyOtp);
+
 router.post('/login', [authValidator.logInValidator], authController.logIn);
 
 router.post('/forgotpassword', authValidator.forgotPasswordValidator,
