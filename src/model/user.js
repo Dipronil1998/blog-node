@@ -15,8 +15,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  email_verified_at: {
-    type: Date,
+  account_verified: {
+    type: Boolean,
+    default: false,
   },
   password: {
     type: String,
@@ -39,6 +40,12 @@ userSchema.pre('save', async function(next) {
   }
   next();
 });
+
+userSchema.methods.generateOTP = async function() {
+  return Math.floor(
+      Math.random() * (999999 - 110000 + 1) + 110000,
+  );
+};
 
 // generate token
 userSchema.methods.generateAuthToken = async function() {

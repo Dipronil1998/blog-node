@@ -68,7 +68,7 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY1Njc0OTMsImV4cCI6MTY0NjU3MTA5M30.HoKltDGGO9ANShKyEIuVKJAoPFbMgItw1GOBDq9PPtE",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY1NzU5NjUsImV4cCI6MTY0NjU3OTU2NX0.zXp-NBvR_L5maTAvfW7yFJTVJyhkPWKWPE9A3Dr-GdA",
 						"type": "text"
 					},
 					{
@@ -83,7 +83,7 @@
 					"formdata": [
 						{
 							"key": "name",
-							"value": "Politics",
+							"value": "Sports",
 							"type": "text"
 						},
 						{
@@ -137,19 +137,19 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY1Njc0OTMsImV4cCI6MTY0NjU3MTA5M30.HoKltDGGO9ANShKyEIuVKJAoPFbMgItw1GOBDq9PPtE",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY1NzIxMDksImV4cCI6MTY0NjU3NTcwOX0.sp3XPUgH2luokIkOLsIOPlYsb_RQ4r15kJp0nf11hxM",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/category/621a38fbf3f824ece44868ce",
+					"raw": "localhost:3000/category/6224b25fe94feb5285edea8e",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"category",
-						"621a38fbf3f824ece44868ce"
+						"6224b25fe94feb5285edea8e"
 					]
 				}
 			},
@@ -378,7 +378,7 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY1Njc0OTMsImV4cCI6MTY0NjU3MTA5M30.HoKltDGGO9ANShKyEIuVKJAoPFbMgItw1GOBDq9PPtE",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY2NTgwMDYsImV4cCI6MTY0NjY2MTYwNn0.rsk6Jjjc6Op5OemKiGNUIY6gfqKzelYD2qK3nlEaWtE",
 						"type": "text"
 					}
 				],
@@ -387,25 +387,25 @@
 					"formdata": [
 						{
 							"key": "name",
-							"value": "Inter",
+							"value": "International",
 							"type": "text"
 						},
 						{
 							"key": "image",
 							"type": "file",
-							"src": "/home/dipronil/Pictures/person.jpeg"
+							"src": "/home/dipronil/Pictures/login.jpeg"
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost:3000/category/6224a6c6e36775ea85554b4f",
+					"raw": "localhost:3000/category/6224c3202fe962f032f86a9d",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"category",
-						"6224a6c6e36775ea85554b4f"
+						"6224c3202fe962f032f86a9d"
 					]
 				}
 			},
@@ -418,19 +418,48 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY1NzIxMDksImV4cCI6MTY0NjU3NTcwOX0.sp3XPUgH2luokIkOLsIOPlYsb_RQ4r15kJp0nf11hxM",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY1NzU5NjUsImV4cCI6MTY0NjU3OTU2NX0.zXp-NBvR_L5maTAvfW7yFJTVJyhkPWKWPE9A3Dr-GdA",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/category/6224b25fe94feb5285edea8e",
+					"raw": "localhost:3000/category/6224b8f54e5bfa6c5ad849b5",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"category",
-						"6224b25fe94feb5285edea8e"
+						"6224b8f54e5bfa6c5ad849b5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verifyotp",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"otp\":\"252702\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/auth/verifyotp/622dec88d55c814fd9603d59",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"verifyotp",
+						"622dec88d55c814fd9603d59"
 					]
 				}
 			},

@@ -5,7 +5,8 @@ const categoryController=require('../controller/CategoryController');
 const {verifyTokenAndAdmin} = require('../middleware/verifytoken');
 const categoryValidator=require('../validator/CategoryValidation');
 const {validationResult} = require('express-validator');
-const {imageValidate,imageValidateUpdate}=require('../middleware/ImageValidator');
+const {imageValidate}=
+require('../middleware/ImageValidator');
 
 
 const multer = require('multer');

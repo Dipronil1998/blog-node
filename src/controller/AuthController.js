@@ -1,16 +1,16 @@
 const User = require('../model/user');
+const Otp = require('../model/otp');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const message = require('../../config/constant');
-const {validationResult} = require('express-validator');
-const sendMail=require('../middleware/mail');
-const logger= require('../utils/logger');
+const sendMail = require('../middleware/mail');
+const logger = require('../utils/logger');
 
 exports.signUp = async (req, res) => {
   try {
     const {name, email, password, confirm_password} = req.body;
     const emailuser = await User.findOne({email: email});
-    if(!emailuser){
+    if (!emailuser) {
       if (password == confirm_password) {
         const user = new User({
           name: name,
@@ -18,16 +18,47 @@ exports.signUp = async (req, res) => {
           password: password,
           confirm_password: confirm_password,
         });
+        const otp = await user.generateOTP();
         await user.save();
-        res.status(201).json({success: message.createSuccessfull});
-        logger.info(message.createSuccessfull);
+        await new Otp({
+          user_id: user._id,
+          OTP: otp,
+        }).save();
+        sendMail({
+          from: process.env.EMAIL,
+          to: user.email,
+          subject: 'Verify OTP',
+          html: `<h5>Hi ${user.name}</h5><p>Your OTP is: <b>${otp}</b>, 
+          Valid for 10 minutes. Please do not share OTP with anyone.</p>`,
+        });
+        res.status(201).json({success: `OTP Sent To ${user.email}`});
+        logger.info(`OTP Sent To ${user.email}`);
       } else {
         res.status(400).json({error: message.passwordMismatched});
         logger.error(message.passwordMismatched);
       }
-    }else{
+    } else {
       res.status(404).json({error: 'User Already Exists'});
-      logger.error('User Already Exists')
+      logger.error('User Already Exists');
+    }
+  } catch (error) {
+    res.status(400).json(error);
+    logger.error(error);
+  }
+};
+
+exports.verifyOtp = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const otp = req.body.otp;
+    const otpInfo = await Otp.findOne({user_id: _id});
+    if (otpInfo && otp === otpInfo.OTP) {
+      await User.findByIdAndUpdate({_id: _id}, {account_verified: true});
+      res.status(200).json({success: message.createSuccessfull});
+      logger.info(message.createSuccessfull);
+    } else {
+      res.status(404).json({error: 'Your OTP is Invalid.'});
+      logger.error('Your OTP is Invalid.');
     }
   } catch (error) {
     res.status(400).json(error);
@@ -46,28 +77,33 @@ exports.logIn = async (req, res) => {
     const {email, password} = req.body;
     const emailuser = await User.findOne({email: email});
     if (emailuser) {
-      const isValid = await bcrypt.compare(password, emailuser.password);
-      const token = await emailuser.generateAuthToken();
-      if (isValid) {
-        res
-            .status(200)
-            .json({success: message.loginSuccessfully, token: token});
-        logger.info(message.loginSuccessfully)
+      if (emailuser.account_verified) {
+        const isValid = await bcrypt.compare(password, emailuser.password);
+        const token = await emailuser.generateAuthToken();
+        if (isValid) {
+          res
+              .status(200)
+              .json({success: message.loginSuccessfully, token: token});
+          logger.info(message.loginSuccessfully);
+        } else {
+          res.status(400).json({error: message.invalidCredientials});
+          logger.error(message.invalidCredientials);
+        }
       } else {
-        res.status(400).json({error: message.invalidCredientials});
-        logger.error(message.invalidCredientials)
+        res.status(400).json({error: 'Please Veriry Your Account'});
+        logger.error('Please Veriry Your Account');
       }
     } else {
       res.json({error: message.userNotExists});
-      logger.error(message.userNotExists)
+      logger.error(message.userNotExists);
     }
   } catch (error) {
     res.json({error: 'Invalid Email/Password'});
-    logger.error('Invalid Email/Password')
+    logger.error('Invalid Email/Password');
   }
 };
 
-exports.sendUserPasswordResetEmail=async (req, res) => {
+exports.sendUserPasswordResetEmail = async (req, res) => {
   try {
     const email = req.body.email;
     if (email) {
@@ -92,18 +128,18 @@ exports.sendUserPasswordResetEmail=async (req, res) => {
         logger.info('Password Reset Email Sent... Please Check Your Email');
       } else {
         res.send({message: 'Email doesn\'t exists'});
-        logger.error('Email doesn\'t exists')
+        logger.error('Email doesn\'t exists');
       }
     } else {
       res.send({message: 'Email Field is Required'});
     }
   } catch (error) {
     res.json({error: 'Something Wrong'});
-    logger.error('Something Wrong')
+    logger.error('Something Wrong');
   }
 };
 
-exports.userPasswordReset=async (req, res) => {
+exports.userPasswordReset = async (req, res) => {
   const {password, confirm_password} = req.body;
   const {id, token} = req.params;
   const user = await User.findById(id);
@@ -116,19 +152,19 @@ exports.userPasswordReset=async (req, res) => {
           message: 'New Password and Confirm New Password doesn\'t match',
         });
       } else {
-        const salt =Number(process.env.SALT);
+        const salt = Number(process.env.SALT);
         const newHashPassword = await bcrypt.hash(password, salt);
         await User.findByIdAndUpdate(user._id, {
           $set: {password: newHashPassword},
         });
         res.json({message: 'Password Reset Successfully'});
-        logger.info('Password Reset Successfully')
+        logger.info('Password Reset Successfully');
       }
     } else {
       res.json({message: 'All Fields are Required'});
     }
   } catch (error) {
-    looger.error('Invalid Token')
+    looger.error('Invalid Token');
     res.send({message: 'Invalid Token'});
   }
 };
