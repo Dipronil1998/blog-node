@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const message = require('../../config/constant');
 const sendMail = require('../middleware/mail');
 const logger = require('../utils/logger');
+const moment = require('moment');
 
 exports.signUp = async (req, res) => {
   try {
@@ -52,7 +53,7 @@ exports.verifyOtp = async (req, res) => {
     const _id = req.params.id;
     const otp = req.body.otp;
     const otpInfo = await Otp.findOne({user_id: _id});
-    if (otpInfo && otp === otpInfo.OTP) {
+    if (otpInfo && otp === otpInfo.OTP && moment().format('hh:mm:ss')<=otpInfo.expairAt) {
       await User.findByIdAndUpdate({_id: _id}, {account_verified: true});
       res.status(200).json({success: message.createSuccessfull});
       logger.info(message.createSuccessfull);

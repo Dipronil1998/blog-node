@@ -1,17 +1,25 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
+// const downloadDate = moment().format("DD-MM-YYYY hh:mm:ss");
+// console.log(typeof downloadDate);
+// console.log(moment().format("hh:mm:ss"));
+// console.log(moment().add(10, "minutes").format("hh:mm:ss"));
+// console.log(moment().isBefore(moment().add(10, "minutes")));
 
 const otpSchema = new mongoose.Schema({
-  user_id:
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    },
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
   OTP: {
     type: String,
     required: true,
   },
-  createdAt: {type: Date, default: Date.now},
-  expairIn: {type: Date, expires: '10m', default: Date},
+  createdAt: {type: String, default: moment().format('hh:mm:ss')},
+  expairAt: {
+    type: String,
+    default: moment().add(10, 'minutes').format('hh:mm:ss'),
+  },
 });
 
 const Otp = new mongoose.model('Otp', otpSchema);
