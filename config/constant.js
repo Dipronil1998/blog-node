@@ -1,6 +1,6 @@
 fillAllField='Fill All Fields';
 createSuccessfull='User Registration Successfully';
-passwordMismatched='password and confirm password do not match';
+passwordMismatched='Password and Confirm password do not match';
 loginSuccessfully='Login Successfully';
 invalidCredientials='Invalid Credientials';
 userNotExists='User not exist';

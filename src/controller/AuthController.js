@@ -32,14 +32,14 @@ exports.signUp = async (req, res) => {
           html: `<h5>Hi ${user.name}</h5><p>Your OTP is: <b>${otp}</b>, 
           Valid for 10 minutes. Please do not share OTP with anyone.</p>`,
         });
-        res.status(201).json({success: `OTP Sent To ${user.email}`});
+        res.status(201).json({status:true, message: `OTP Sent To ${user.email}`});
         logger.info(`OTP Sent To ${user.email}`);
       } else {
-        res.status(400).json({error: message.passwordMismatched});
+        res.status(400).json({status:false, message: message.passwordMismatched});
         logger.error(message.passwordMismatched);
       }
     } else {
-      res.status(404).json({error: 'User Already Exists'});
+      res.status(404).json({status:false, message: 'User Already Exists'});
       logger.error('User Already Exists');
     }
   } catch (error) {
