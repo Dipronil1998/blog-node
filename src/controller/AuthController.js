@@ -32,14 +32,14 @@ exports.signUp = async (req, res) => {
           html: `<h5>Hi ${user.name}</h5><p>Your OTP is: <b>${otp}</b>, 
           Valid for 10 minutes. Please do not share OTP with anyone.</p>`,
         });
-        res.status(201).json({status:true, message: `OTP Sent To ${user.email}`});
+        res.status(201).json({status: true, message: `OTP Sent To ${user.email}`});
         logger.info(`OTP Sent To ${user.email}`);
       } else {
-        res.status(400).json({status:false, message: message.passwordMismatched});
+        res.status(400).json({status: false, message: message.passwordMismatched});
         logger.error(message.passwordMismatched);
       }
     } else {
-      res.status(404).json({status:false, message: 'User Already Exists'});
+      res.status(404).json({status: false, message: 'User Already Exists'});
       logger.error('User Already Exists');
     }
   } catch (error) {
@@ -55,10 +55,10 @@ exports.verifyOtp = async (req, res) => {
     const otpInfo = await Otp.findOne({user_id: _id});
     if (otpInfo && otp === otpInfo.OTP && moment().format('hh:mm:ss')<=otpInfo.expairAt) {
       await User.findByIdAndUpdate({_id: _id}, {account_verified: true});
-      res.status(200).json({message: message.createSuccessfull});
+      res.status(200).json({status: true, message: message.createSuccessfull});
       logger.info(message.createSuccessfull);
     } else {
-      res.status(404).json({error: 'Your OTP is Invalid.'});
+      res.status(404).json({status: false, message: 'Your OTP is Invalid'});
       logger.error('Your OTP is Invalid.');
     }
   } catch (error) {

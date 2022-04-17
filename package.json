@@ -10,8 +10,8 @@
     "start": "env-cmd -f ./config/dev.env nodemon ./src/index.js",
     "seed": "env-cmd -f ./config/dev.env node ./config/seeds/seed.js",
     "seed-test": "env-cmd -f ./config/test.env node ./config/seeds/seed.js",
-    "lint-fix": "./node_modules/.bin/eslint ./src/index.js ./src/**/**.js ./config/**.js ./config/seeds/**.js --fix",
-    "lint": "./node_modules/.bin/eslint ./src/index.js ./src/**/**.js ./config/**.js ./config/seeds/**.js"
+    "lint": "./node_modules/.bin/eslint ./src/index.js ./src/**/**.js ./config/**.js ./config/seeds/**.js ./test/**/**.js",
+    "lint-fix": "./node_modules/.bin/eslint ./src/index.js ./src/**/**.js ./config/**.js ./config/seeds/**.js ./test/**/**.js --fix"
   },
   "keywords": [],
   "author": "",

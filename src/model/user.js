@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   role_id: {
     type: Number,
     default: 2,
@@ -34,21 +34,21 @@ const userSchema = new mongoose.Schema({
   timestamps: true,
 });
 
-userSchema.pre('save', async function(next) {
+UserSchema.pre('save', async function(next) {
   if (this.isModified('password')) {
     this.password = await bcrypt.hash(this.password, 12);
   }
   next();
 });
 
-userSchema.methods.generateOTP = async function() {
+UserSchema.methods.generateOTP = async function() {
   return Math.floor(
       Math.random() * (999999 - 110000 + 1) + 110000,
   );
 };
 
 // generate token
-userSchema.methods.generateAuthToken = async function() {
+UserSchema.methods.generateAuthToken = async function() {
   try {
     const token = jwt.sign({
       _id: this._id,
@@ -63,5 +63,5 @@ userSchema.methods.generateAuthToken = async function() {
   }
 };
 
-const User = new mongoose.model('User', userSchema);
+const User = new mongoose.model('User', UserSchema);
 module.exports = User;
