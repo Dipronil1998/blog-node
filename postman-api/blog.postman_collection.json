@@ -68,7 +68,7 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY1NzU5NjUsImV4cCI6MTY0NjU3OTU2NX0.zXp-NBvR_L5maTAvfW7yFJTVJyhkPWKWPE9A3Dr-GdA",
+						"value": "{{token}}",
 						"type": "text"
 					},
 					{
@@ -83,13 +83,13 @@
 					"formdata": [
 						{
 							"key": "name",
-							"value": "Sports",
+							"value": "Sports21",
 							"type": "text"
 						},
 						{
 							"key": "image",
 							"type": "file",
-							"src": "/home/dipronil/Pictures/God-Images-Download-87.jpg"
+							"src": "/home/dipronil/Pictures/login.jpeg"
 						}
 					]
 				},
@@ -113,7 +113,7 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE5ZWVjNzkxY2MyNTAzOTBkMjY3ZDEiLCJpc0FkbWluIjoyLCJpYXQiOjE2NDYyMjU0MjksImV4cCI6MTY0NjIyOTAyOX0.HQWtTwf9Q7NYofU9i5u4iD89aMEhKPhuIA_FXU0vcuk",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -137,7 +137,7 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY1NzIxMDksImV4cCI6MTY0NjU3NTcwOX0.sp3XPUgH2luokIkOLsIOPlYsb_RQ4r15kJp0nf11hxM",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -162,13 +162,13 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE5ZWVjNzkxY2MyNTAzOTBkMjY3ZDEiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDYyMjkxMTUsImV4cCI6MTY0NjIzMjcxNX0.IZt08STTJ9uYTlF_vAtadl8ZjnvmT9NLfoAliiabQZk",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\":\"injjj\"\n}",
+					"raw": "{\n    \"name\":\"injjEEE\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -195,7 +195,7 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE5ZWVjNzkxY2MyNTAzOTBkMjY3ZDEiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDYyMjkxMTUsImV4cCI6MTY0NjIzMjcxNX0.IZt08STTJ9uYTlF_vAtadl8ZjnvmT9NLfoAliiabQZk",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -223,7 +223,7 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE5ZWVjNzkxY2MyNTAzOTBkMjY3ZDEiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDYyMjkxMTUsImV4cCI6MTY0NjIzMjcxNX0.IZt08STTJ9uYTlF_vAtadl8ZjnvmT9NLfoAliiabQZk",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -251,7 +251,7 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzNjlhYTYwNTFmYjlkODk4YjUyMjQiLCJyb2xlX2lkIjoyLCJpYXQiOjE2NDY0ODc5OTcsImV4cCI6MTY0NjQ5MTU5N30.DDr0_GaEQSPzpbHBR-gFvBi6cnTc-C7MkIV3rMWpWdI",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -295,7 +295,7 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE5ZWVjNzkxY2MyNTAzOTBkMjY3ZDEiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY0ODg1MjQsImV4cCI6MTY0NjQ5MjEyNH0.HzWJEkxUNIcj54V5s7A1NUSCEGoAjBqOMGS7a20roOc",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -378,7 +378,7 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY2NTgwMDYsImV4cCI6MTY0NjY2MTYwNn0.rsk6Jjjc6Op5OemKiGNUIY6gfqKzelYD2qK3nlEaWtE",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -418,19 +418,19 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJyb2xlX2lkIjoxLCJpYXQiOjE2NDY1NzU5NjUsImV4cCI6MTY0NjU3OTU2NX0.zXp-NBvR_L5maTAvfW7yFJTVJyhkPWKWPE9A3Dr-GdA",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/category/6224b8f54e5bfa6c5ad849b5",
+					"raw": "localhost:3000/category/6235e501f5930df1c7cbd53c",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"category",
-						"6224b8f54e5bfa6c5ad849b5"
+						"6235e501f5930df1c7cbd53c"
 					]
 				}
 			},
