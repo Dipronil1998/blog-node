@@ -4,6 +4,7 @@ const fs = require('fs');
 
 exports.create = async (req, res) => {
   try {
+    console.log(req.file);
     const name = req.body.name;
     const image = req.file.path;
     const slug = name.toLowerCase();
@@ -55,20 +56,26 @@ exports.update = async (req, res) => {
   try {
     const _id = req.params.id;
     const getCategory = await Category.findById({_id: _id});
-    const name = req.body.name || getCategory.name;
-    const image = getCategory.image || req.file.path;
-    console.log(image);
+    const oldImage = getCategory.image;
+    console.log(oldImage);
+    const name =  getCategory.name || req.body.name;
+    const image =  getCategory.image || req.file.path;
+    console.log(name);
     const updateData = {
       name: name,
       slug: name.toLowerCase(),
       image: image,
     };
+    console.log(updateData);
     const category = await Category.findByIdAndUpdate({_id: _id}, updateData);
     if (!category) {
-      res.status(400).json({message: message.dataNotFound});
+      res.status(400).json({status: false,message: message.dataNotFound});
     } else {
       res.setHeader('Content-Type', 'application/json');
-      res.status(200).json({message: 'Category Update Successfully'});
+      // if(req.file){
+
+      // }
+      res.status(200).json({status: true,message: 'Category Update Successfully'});
     }
   } catch (error) {
     console.log(error);
@@ -85,7 +92,7 @@ exports.delete = async (req, res) => {
     } else {
       const path = category.image;
       fs.unlinkSync(path);
-      res.status(200).json({message: 'Category Delete Successfully'});
+      res.status(200).json({status:true,message: 'Category Delete Successfully'});
     }
   } catch (error) {
     res.status(500).send(error);

@@ -22,5 +22,5 @@ function dbDisconnect() {
   mongoose.disconnect();
 }
 
-module.exports = {dbConnect,dbDisconnect}
+module.exports = {dbConnect, dbDisconnect};
 

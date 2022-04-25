@@ -84,10 +84,10 @@ exports.logIn = async (req, res) => {
         if (isValid) {
           res
               .status(200)
-              .json({success: message.loginSuccessfully, token: token});
+              .json({status: true, message: message.loginSuccessfully, token: token});
           logger.info(message.loginSuccessfully);
         } else {
-          res.status(400).json({error: message.invalidCredientials});
+          res.status(400).json({status: false, message: message.invalidCredientials});
           logger.error(message.invalidCredientials);
         }
       } else {
@@ -95,7 +95,7 @@ exports.logIn = async (req, res) => {
         logger.error('Please Veriry Your Account');
       }
     } else {
-      res.json({error: message.userNotExists});
+      res.json({status: false, error: message.userNotExists});
       logger.error(message.userNotExists);
     }
   } catch (error) {
