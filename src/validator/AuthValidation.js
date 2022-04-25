@@ -1,12 +1,12 @@
 const {body} = require('express-validator');
 
 exports.signInValidator=[
-  body('name').isString().withMessage('Category name should be alphabetic')
+  body('name').isString().withMessage('Name should be alphabetic')
+      .notEmpty().withMessage('Name should not be empty!')
       .isLength({min: 2, max: 15})
-      .withMessage('Category name maximum 15 character')
-      .notEmpty().withMessage('Category name should not be empty!'),
+      .withMessage('Category name maximum 15 character'),
   body('email').isEmail().withMessage('Please Enter a valid Email')
-      .normalizeEmail().notEmpty().withMessage('Email should not be empty!'),
+      .normalizeEmail({gmail_remove_dots: false}).notEmpty().withMessage('Email should not be empty!'),
   body('password').trim()
       .matches(/^(?=.{8,32})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/)
       .withMessage(`Password should be a alphanumeric,
@@ -18,7 +18,7 @@ exports.signInValidator=[
 
 exports.logInValidator=[
   body('email').isEmail().withMessage('Please Enter a valid Email')
-      .normalizeEmail().notEmpty().withMessage('Email should not be empty!'),
+      .normalizeEmail({gmail_remove_dots: false}).notEmpty().withMessage('Email should not be empty!'),
   body('password').trim()
       .notEmpty().withMessage('Password should not be empty!'),
 ];

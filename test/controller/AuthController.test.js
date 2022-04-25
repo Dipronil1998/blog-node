@@ -53,7 +53,7 @@ describe('POST /auth/signup', () => {
   });
 
   test('Verify User With Incorrect OTP', async () => {
-    const id = (await User.find({email: 'dipronildasnet@gmail.com'}, '_id').exec())[0];
+    const id = (await User.find({email: 'dipronildas.net@gmail.com'}, '_id').exec())[0];
     const getCorrectOTP = (await Otp.find({'user_id': id}, 'OTP').exec())[0];
     const verifyOtp = {
       otp: 123456,
@@ -68,7 +68,7 @@ describe('POST /auth/signup', () => {
 
 
   test('Verify User With Correct OTP', async () => {
-    const id = (await User.find({email: 'dipronildasnet@gmail.com'}, '_id').exec())[0];
+    const id = (await User.find({email: 'dipronildas.net@gmail.com'}, '_id').exec())[0];
     const getCorrectOTP = (await Otp.find({'user_id': id}, 'OTP').exec())[0];
     const verifyOtp = {
       otp: getCorrectOTP.OTP,
