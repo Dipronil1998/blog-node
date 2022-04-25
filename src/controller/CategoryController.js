@@ -18,7 +18,7 @@ exports.create = async (req, res) => {
       await category.save();
       res.status(201).json({message: 'Category Created Successfully'});
     } else {
-      fs.unlinkSync(image)
+      fs.unlinkSync(image);
       res.status(400).json({message: 'Category Already Exists'});
     }
   } catch (error) {
@@ -57,26 +57,24 @@ exports.update = async (req, res) => {
   try {
     const _id = req.params.id;
     const getCategory = await Category.findById({_id: _id});
-    const oldImage = getCategory.image;
-    console.log(oldImage);
-    const name =  getCategory.name || req.body.name;
-    const image =  getCategory.image || req.file.path;
-    console.log(name);
-    const updateData = {
-      name: name,
-      slug: name.toLowerCase(),
-      image: image,
-    };
-    console.log(updateData);
-    const category = await Category.findByIdAndUpdate({_id: _id}, updateData);
-    if (!category) {
-      res.status(400).json({status: false,message: message.dataNotFound});
+    if (!getCategory) {
+      return res.status(404).json({status: false, message: message.dataNotFound});
     } else {
-      res.setHeader('Content-Type', 'application/json');
-      // if(req.file){
+      const oldImage = getCategory.image;
+      // console.log(oldImage);
+      const name = req.body.name || getCategory.name;
+      if (req.file) {
+        var image = req.file.path;
+      }
 
-      // }
-      res.status(200).json({status: true,message: 'Category Update Successfully'});
+      const updateData = {
+        name: name,
+        slug: name.toLowerCase(),
+        image: image || oldImage,
+      };
+      console.log(updateData);
+      await Category.findByIdAndUpdate({_id: _id}, updateData);
+      res.status(200).json({status: true, message: 'Category Update Successfully'});
     }
   } catch (error) {
     console.log(error);
@@ -93,7 +91,7 @@ exports.delete = async (req, res) => {
     } else {
       const path = category.image;
       fs.unlinkSync(path);
-      res.status(200).json({status:true,message: 'Category Delete Successfully'});
+      res.status(200).json({status: true, message: 'Category Delete Successfully'});
     }
   } catch (error) {
     res.status(500).send(error);
