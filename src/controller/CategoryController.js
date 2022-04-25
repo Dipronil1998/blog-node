@@ -18,6 +18,7 @@ exports.create = async (req, res) => {
       await category.save();
       res.status(201).json({message: 'Category Created Successfully'});
     } else {
+      fs.unlinkSync(image)
       res.status(400).json({message: 'Category Already Exists'});
     }
   } catch (error) {
