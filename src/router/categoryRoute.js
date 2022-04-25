@@ -52,7 +52,8 @@ router.get('/:id', verifyTokenAndAdmin, validateResult,
 // update data by PATCH method by ID
 router.put('/:id', verifyTokenAndAdmin, upload.single('image'),
     categoryValidator.updateCategoryValidator, validateResult,
-    imageValidateUpdate, categoryController.update);
+    // imageValidateUpdate,
+    categoryController.update);
 
 // DELETE data
 router.delete('/:id', verifyTokenAndAdmin, categoryController.delete);

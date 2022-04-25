@@ -1,4 +1,3 @@
-const logger = require('../../src/utils/logger');
 const request = require('supertest');
 const app = require('../../config/app');
 
