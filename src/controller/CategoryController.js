@@ -61,19 +61,20 @@ exports.update = async (req, res) => {
       return res.status(404).json({status: false, message: message.dataNotFound});
     } else {
       const oldImage = getCategory.image;
-      // console.log(oldImage);
       const name = req.body.name || getCategory.name;
       if (req.file) {
-        var image = req.file.path;
+        var newImage = req.file.path;
       }
-
       const updateData = {
         name: name,
         slug: name.toLowerCase(),
-        image: image || oldImage,
+        image: newImage || oldImage,
       };
       console.log(updateData);
       await Category.findByIdAndUpdate({_id: _id}, updateData);
+      if(newImage){
+        fs.unlinkSync(oldImage);
+      }
       res.status(200).json({status: true, message: 'Category Update Successfully'});
     }
   } catch (error) {
