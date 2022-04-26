@@ -4,7 +4,7 @@ router.use(express.json({}));
 const authController=require('../controller/AuthController');
 const authValidator=require('../validator/AuthValidation');
 const {validationResult} = require('express-validator');
-
+const {verifyToken} = require('../middleware/verifytoken')
 
 const validateResult=(req, res, next)=>{
   const errors = validationResult(req);
@@ -31,5 +31,10 @@ router.post('/forgotpassword', authValidator.forgotPasswordValidator,
 router.post('/resetpassword/:id/:token', authValidator.resetPasswordValidator,
     validateResult, authController.userPasswordReset);
 
+router.put('/changepassword', verifyToken,authValidator.changePasswordValidator,
+    validateResult, authController.changeUserPassword);
+
+router.put('/updateprofile', verifyToken,authValidator.changePasswordValidator,
+    validateResult, authController.changeUserPassword);
 
 module.exports = router;

@@ -169,3 +169,36 @@ exports.userPasswordReset = async (req, res) => {
     res.send({message: 'Invalid Token'});
   }
 };
+
+exports.changeUserPassword = async (req, res) => {
+  try {
+    // const oldPassword = req.body.old_password
+   const password = req.body.password;
+   const confirmPassword = req.body.confirm_password;
+   if (password && confirmPassword) {
+     if (password !== confirmPassword) {
+       res.send({
+         status: false,
+         message: "New Password and Confirm New Password doesn't match",
+       });
+     } else {
+       const salt = await bcrypt.genSalt(10);
+       const newHashPassword = await bcrypt.hash(password, salt);
+       await User.findByIdAndUpdate(
+         { _id: req.user._id },
+         {
+           $set: { password: newHashPassword },
+         }
+       );
+       res.send({
+         status: true,
+         message: "Password changed succesfully",
+       });
+     }
+   } else {
+     res.send({ status: "failed", message: "All Fields are Required" });
+   }
+  } catch (error) {
+    console.log(error);
+  }
+}
