@@ -5,7 +5,7 @@ const categoryController=require('../controller/CategoryController');
 const {verifyTokenAndAdmin} = require('../middleware/verifytoken');
 const categoryValidator=require('../validator/CategoryValidation');
 const {validationResult} = require('express-validator');
-const {imageValidate, imageValidateUpdate}=
+const {imageValidate}=
 require('../middleware/ImageValidator');
 
 
@@ -52,7 +52,7 @@ router.get('/:id', verifyTokenAndAdmin, validateResult,
 // update data by PATCH method by ID
 router.put('/:id', verifyTokenAndAdmin, upload.single('image'),
     categoryValidator.updateCategoryValidator, validateResult,
-    // imageValidateUpdate,
+    imageValidate,
     categoryController.update);
 
 // DELETE data
