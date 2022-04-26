@@ -4,7 +4,6 @@ const fs = require('fs');
 
 exports.create = async (req, res) => {
   try {
-    console.log(req.file);
     const name = req.body.name;
     const image = req.file.path;
     const slug = name.toLowerCase();
@@ -70,16 +69,14 @@ exports.update = async (req, res) => {
         slug: name.toLowerCase(),
         image: newImage || oldImage,
       };
-      console.log(updateData);
       await Category.findByIdAndUpdate({_id: _id}, updateData);
-      if(newImage){
+      if (newImage) {
         fs.unlinkSync(oldImage);
       }
       res.status(200).json({status: true, message: 'Category Update Successfully'});
     }
   } catch (error) {
-    console.log(error);
-    res.status(404).send(error);
+    res.status(400).send(error);
   }
 };
 
