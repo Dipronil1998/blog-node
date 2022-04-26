@@ -80,6 +80,18 @@ describe('POST /auth/signup', () => {
     expect(response.status).not.toEqual(201);
   });
 
+  test('Login With Correct Creendial', async () => {
+    const loginData = {
+      email: 'test@example.com',
+      password: 'Dip@12345',
+    };
+    const response = await request(app).post('/auth/login').send(loginData);
+    const jsonResponse = JSON.parse(response.text);
+    expect(jsonResponse.message).toEqual(message.createSuccessfull);
+    expect(response.status).toEqual(200);
+    expect(response.status).not.toEqual(201);
+  });
+
   afterAll(async () => {
     await User.deleteMany();
     await Otp.deleteMany();

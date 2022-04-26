@@ -30,11 +30,19 @@ exports.forgotPasswordValidator=[
 
 exports.resetPasswordValidator=[
   body('password').trim()
+      .notEmpty().withMessage('Password should not be empty!')
       .matches(/^(?=.{8,32})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/)
-      .withMessage(`Password should be a alphanumeric,
-      spcial character and minium 8 Bit long`)
-      .notEmpty().withMessage('Password should not be empty!'),
+      .withMessage(`Password should be a alphanumeric, spcial character and minium 8 Bit long`),
   body('confirm_password').trim()
       .notEmpty().withMessage('Confirm Password should not be empty!'),
 ];
 
+
+exports.changePasswordValidator=[
+    body('password').trim()
+        .notEmpty().withMessage('Password should not be empty!')
+        .matches(/^(?=.{8,32})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/)
+        .withMessage(`Password should be a alphanumeric, spcial character and minium 8 Bit long`),
+    body('confirm_password').trim()
+        .notEmpty().withMessage('Confirm Password should not be empty!'),
+  ];
