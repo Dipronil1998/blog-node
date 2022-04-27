@@ -4,7 +4,7 @@ exports.signInValidator=[
   body('name').isString().withMessage('Name should be alphabetic')
       .notEmpty().withMessage('Name should not be empty!')
       .isLength({min: 2, max: 15})
-      .withMessage('Category name maximum 15 character'),
+      .withMessage('Name maximum 15 character'),
   body('email').isEmail().withMessage('Please Enter a valid Email')
       .normalizeEmail({gmail_remove_dots: false}).notEmpty().withMessage('Email should not be empty!'),
   body('password').trim()
@@ -45,4 +45,17 @@ exports.changePasswordValidator=[
         .withMessage(`Password should be a alphanumeric, spcial character and minium 8 Bit long`),
     body('confirm_password').trim()
         .notEmpty().withMessage('Confirm Password should not be empty!'),
-  ];
+];
+
+exports.updateProfileValidator = [
+    body('name').isAlpha('en-US', { ignore: ' ' }).withMessage('Name should be alphabetic')
+        .optional({nullable: true})
+        .isLength({min: 2, max: 15})
+        .withMessage('Name maximum 15 character'),
+    body('about').isString()
+        .optional({ nullable: true })
+        .isString()
+        .withMessage('About should be alphabetic')
+        .isLength({ min: 2, max: 30 })
+        .withMessage('About be min 2 max 30 character'),
+];

@@ -6,6 +6,7 @@ const message = require('../../config/constant');
 const sendMail = require('../middleware/mail');
 const logger = require('../utils/logger');
 const moment = require('moment');
+const fs = require('fs');
 
 exports.signUp = async (req, res) => {
   try {
@@ -198,6 +199,30 @@ exports.changeUserPassword = async (req, res) => {
    } else {
      res.send({ status: "failed", message: "All Fields are Required" });
    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+exports.updateProfile = async (req, res)=>{
+  try {
+    const user = await User.findById(req.user._id);
+    const oldProfilePic = user.image;
+    const name = req.body.name || user.name;
+    const about = req.body.about || user.about;
+    if (req.file) {
+      var newProfilePic = req.file.path;
+    }
+    const updateProfile = {
+      name:name,
+      image: newProfilePic || oldProfilePic,
+      about: about
+    }
+    await User.findByIdAndUpdate({_id: req.user._id}, updateProfile);
+    if (newProfilePic) {
+      fs.unlinkSync(oldProfilePic);
+    }
+    res.status(200).json({status: true, message: 'Profile Updated Successfully'});
   } catch (error) {
     console.log(error);
   }
