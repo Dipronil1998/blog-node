@@ -5,6 +5,26 @@ const authController=require('../controller/AuthController');
 const authValidator=require('../validator/AuthValidation');
 const {validationResult} = require('express-validator');
 const {verifyToken} = require('../middleware/verifytoken')
+const {imageValidate, imageUpdateValidate}=
+  require('../middleware/ImageValidator');
+
+const multer = require('multer');
+let upload = multer({dest: './asset/image/profile/'});
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './asset/image/profile/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now()+'-'+file.originalname);
+  },
+});
+
+upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 2, // 2 mb file
+  },
+});
 
 const validateResult=(req, res, next)=>{
   const errors = validationResult(req);
@@ -34,7 +54,7 @@ router.post('/resetpassword/:id/:token', authValidator.resetPasswordValidator,
 router.put('/changepassword', verifyToken,authValidator.changePasswordValidator,
     validateResult, authController.changeUserPassword);
 
-router.put('/updateprofile', verifyToken,authValidator.changePasswordValidator,
-    validateResult, authController.changeUserPassword);
+router.put('/updateprofile', verifyToken,upload.single('profile'),authValidator.updateProfileValidator,
+    validateResult, imageUpdateValidate,authController.updateProfile);
 
 module.exports = router;

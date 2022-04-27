@@ -13,5 +13,18 @@ const imageValidate = (req, res, next) => {
   next();
 };
 
+const imageUpdateValidate = (req, res, next) => {
+  if (req.file) {
+    const expectedFileType = ['png', 'jpg', 'jpeg'];
+    const fileExtension = req.file.mimetype.split('/').pop();
+    if (!expectedFileType.includes(fileExtension)) {
+      fs.unlinkSync(req.file.path);
+      return res.status(400).json({message: 'Image is not valid'});
+    }
+    next();
+  }else{
+    next();
+  }
+};
 
-module.exports = {imageValidate};
+module.exports = {imageValidate,imageUpdateValidate};

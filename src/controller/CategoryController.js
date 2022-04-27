@@ -54,6 +54,7 @@ exports.getOne = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
+    consol
     const _id = req.params.id;
     const getCategory = await Category.findById({_id: _id});
     if (!getCategory) {
@@ -76,6 +77,7 @@ exports.update = async (req, res) => {
       res.status(200).json({status: true, message: 'Category Update Successfully'});
     }
   } catch (error) {
+    console.log(error);
     res.status(400).send(error);
   }
 };
