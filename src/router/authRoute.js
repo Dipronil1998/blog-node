@@ -5,7 +5,7 @@ const authController=require('../controller/AuthController');
 const authValidator=require('../validator/AuthValidation');
 const {validationResult} = require('express-validator');
 const {verifyToken} = require('../middleware/verifytoken')
-const {imageValidate}=
+const {imageValidate, imageUpdateValidate}=
   require('../middleware/ImageValidator');
 
 const multer = require('multer');
@@ -55,6 +55,6 @@ router.put('/changepassword', verifyToken,authValidator.changePasswordValidator,
     validateResult, authController.changeUserPassword);
 
 router.put('/updateprofile', verifyToken,upload.single('profile'),authValidator.updateProfileValidator,
-    validateResult, authController.updateProfile);
+    validateResult, imageUpdateValidate,authController.updateProfile);
 
 module.exports = router;
