@@ -26,6 +26,8 @@ app.use('/category/', categoryRouter);
 const tagRouter=require('../src/router/tagRoute');
 app.use('/tag/', tagRouter);
 
+const postRoute = require('../src/router/postRoute');
+app.use('/post/', postRoute);
 // var blogRouter=require("./router/blog");
 // app.use(blogRouter);
 
