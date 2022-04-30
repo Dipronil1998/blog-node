@@ -28,8 +28,9 @@ app.use('/tag/', tagRouter);
 
 const postRoute = require('../src/router/postRoute');
 app.use('/post/', postRoute);
-// var blogRouter=require("./router/blog");
-// app.use(blogRouter);
+
+const subscribersRoute=require("../src/router/subscribersRoute");
+app.use('/subscribers/',subscribersRoute);
 
 
 module.exports=app;
