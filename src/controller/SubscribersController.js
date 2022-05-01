@@ -19,6 +19,20 @@ exports.create = async (req, res) => {
   }
 };
 
+exports.find = async (req, res) => {
+  try {
+    const search = req.query.search;
+    const subscribers = await Subscribers.find();
+    if (subscribers.length === 0) {
+      res.status(400).json({message: message.dataNotFound});
+    } else {
+      res.status(200).send(subscribers);
+    }
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
 exports.delete = async (req, res)=>{
   try {
     const _id = req.params.id;
