@@ -1,12 +1,75 @@
 const Post = require('../model/post');
+const Tag = require('../model/tag');
+const Category = require('../model/category');
+const Subscribers = require('../model/subscribers')
+const PostUser = require('../model/post_user');
+const CategoryPost = require('../model/category_post');
+const PostTag = require('../model/post_tag');
 const message = require('../../config/constant');
+const sendMail = require('../middleware/mail');
 const fs = require('fs');
 
 exports.create = async (req, res) => {
-    try {
-        console.log("AA");
-        res.send("Aa")
-    } catch (error) {
-        console.log(error);
+  try {
+    const title = req.body.title;
+    const body = req.body.body;
+    const image = req.file.path;
+    const tag = req.body.tag;
+    const category = req.body.category;
+    const slug = title.toLowerCase();
+    const getTag = await Tag.find({ slug: tag.toLowerCase() });
+    if (getTag.length === 0) {
+      fs.unlinkSync(image);
+      return res.status(404).json({ status: false, message: 'Tag Not Exists' })
     }
-}
+    const getCategory = await Category.find({ slug: category.toLowerCase() });
+    if (getCategory.length === 0) {
+      fs.unlinkSync(image);
+      return res.status(404).json({ status: false, message: 'Category Not Exists' })
+    }
+    const getPost = await Post.findOne({ slug: slug });
+    if (!getPost) {
+      if (req.user.role_id === 1) {
+        is_approved = true;
+      } else {
+        is_approved = false;
+      }
+      const post = new Post({
+        user_id: req.user._id,
+        title: title,
+        slug: slug,
+        body: body,
+        image: image,
+        is_approved: is_approved,
+      });
+      await post.save();
+      await new PostUser({
+        user_id: req.user._id,
+        post_id: post._id,
+      }).save();
+      await new CategoryPost({
+        post_id: post._id,
+        category_id: getCategory[0]._id,
+      }).save();
+      await new PostTag({
+        post_id: post._id,
+        tag_id: getTag[0]._id,
+      }).save();
+      res.status(201).json({ status: true, message: 'Post Created Successfully' });
+      const subscribers = await Subscribers.find();
+      for (i = 0; i < subscribers.length; i++) {
+        sendMail({
+          from: process.env.EMAIL,
+          to: subscribers[i].email,
+          subject: 'New Blog Added',
+          html: `<h5>Hi ${subscribers[i].email}</h5><p>New Blog Added.</p>`,
+        });
+      }
+    } else {
+      fs.unlinkSync(image);
+      res.status(400).json({ status: false, message: 'Post Already Exists' });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

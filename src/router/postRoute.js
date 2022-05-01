@@ -2,10 +2,10 @@ const express = require('express');
 const router= new express.Router();
 router.use(express.json({}));
 const postController=require('../controller/PostController');
-const {verifyToken,verifyTokenAndAdmin} = require('../middleware/verifytoken');
+const {verifyToken, verifyTokenAndAdmin} = require('../middleware/verifytoken');
 const postValidator=require('../validator/PostValidator');
 const {validationResult} = require('express-validator');
-const {imageValidate,imageUpdateValidate}=
+const {imageValidate, imageUpdateValidate}=
   require('../middleware/ImageValidator');
 
 const multer = require('multer');
@@ -29,14 +29,14 @@ upload = multer({
 const validateResult=(req, res, next)=>{
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({status:false,'error': errors.array()[0].msg});
+    return res.status(400).json({'status': false, 'error': errors.array()[0].msg});
   }
   next();
 };
 
 // create operation
 router.post('', verifyToken, upload.single('image'),
-    postValidator.postCreateValidator,imageValidate,
+    postValidator.postCreateValidator, imageValidate,
     validateResult, postController.create);
 
 
