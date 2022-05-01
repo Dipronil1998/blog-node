@@ -22,14 +22,18 @@ exports.create = async (req, res) => {
 exports.find = async (req, res) => {
   try {
     const search = req.query.search;
-    const subscribers = await Subscribers.find();
+    if(search){
+      var subscribers = await Subscribers.find({email:search});
+    }else{
+      var subscribers = await Subscribers.find();
+    }
     if (subscribers.length === 0) {
-      res.status(400).json({message: message.dataNotFound});
+      res.status(400).json({status: false,message: message.dataNotFound});
     } else {
-      res.status(200).send(subscribers);
+      res.status(200).json(subscribers);
     }
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).json(error);
   }
 };
 
@@ -40,7 +44,6 @@ exports.delete = async (req, res)=>{
     if (!getSubcribers) {
       res.status(400).json({status: false, message: 'Email Subscription Doesn\'t Exists'});
     } else {
-      await Subscribers.deleteO;
       res.status(200).json({status: true, message: 'Email Subscription Delete Successfully'});
     }
   } catch (error) {
