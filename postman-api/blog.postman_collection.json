@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4050109d-a2d5-4688-a429-afbc8007d79f",
+		"_postman_id": "8e9129af-8ee9-4169-86f1-8b70098c37c6",
 		"name": "blog",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -83,13 +83,13 @@
 					"formdata": [
 						{
 							"key": "name",
-							"value": "Sports21",
+							"value": "Sports",
 							"type": "text"
 						},
 						{
 							"key": "image",
 							"type": "file",
-							"src": "/home/dipronil/Pictures/login.jpeg"
+							"src": "/D:/image/img11.jpg"
 						}
 					]
 				},
@@ -168,7 +168,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\":\"injjEEE\"\n}",
+					"raw": "{\n    \"name\":\"cricket\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -387,25 +387,26 @@
 					"formdata": [
 						{
 							"key": "name",
-							"value": "International",
-							"type": "text"
+							"value": "category123",
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "image",
 							"type": "file",
-							"src": "/home/dipronil/Pictures/login.jpeg"
+							"src": "/D:/image/img8.jpg"
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost:3000/category/6224c3202fe962f032f86a9d",
+					"raw": "localhost:3000/category/62681fa97f524351ebc8db21",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"category",
-						"6224c3202fe962f032f86a9d"
+						"62681fa97f524351ebc8db21"
 					]
 				}
 			},
@@ -423,14 +424,14 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/category/6235e501f5930df1c7cbd53c",
+					"raw": "localhost:3000/category/6268199076646e0ca97326c8",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"category",
-						"6235e501f5930df1c7cbd53c"
+						"6268199076646e0ca97326c8"
 					]
 				}
 			},
@@ -443,7 +444,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"otp\":\"252702\"\n}",
+					"raw": "{\n    \"otp\":\"499582\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -451,7 +452,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/auth/verifyotp/622dec88d55c814fd9603d59",
+					"raw": "localhost:3000/auth/verifyotp/626cdcb84ec673384c485745",
 					"host": [
 						"localhost"
 					],
@@ -459,7 +460,223 @@
 					"path": [
 						"auth",
 						"verifyotp",
-						"622dec88d55c814fd9603d59"
+						"626cdcb84ec673384c485745"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Password",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\":\"Dip@12345\",\r\n    \"confirm_password\":\"Dip@12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/auth/changepassword",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"changepassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Profile",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Dironil ",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "profile",
+							"type": "file",
+							"src": "/D:/image/img7.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/auth/updateprofile",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"updateprofile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "title23",
+							"type": "text"
+						},
+						{
+							"key": "body",
+							"value": "body1",
+							"type": "text"
+						},
+						{
+							"key": "tag",
+							"value": "cricket",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "Sports",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/D:/image/img7.jpg"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/post",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subscription Add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"dipronildas.net@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/subscribers",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"subscribers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Subscription",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/subscribers/626d2d8a58470bbcdbf005d4",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"subscribers",
+						"626d2d8a58470bbcdbf005d4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Subscribers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/subscribers?search=dipronildas.net@gmail.com",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"subscribers"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "dipronildas.net@gmail.com"
+						}
 					]
 				}
 			},

@@ -82,13 +82,37 @@ describe('POST /auth/signup', () => {
 
   test('Login With Correct Creendial', async () => {
     const loginData = {
+      email: 'dipronildas.net@gmail.com',
+      password: 'Dip@12345',
+    };
+    const response = await request(app).post('/auth/login').send(loginData);
+    const jsonResponse = JSON.parse(response.text);
+    expect(jsonResponse.message).toEqual(message.loginSuccessfully);
+    expect(response.status).toEqual(200);
+    expect(response.status).not.toEqual(201);
+  });
+
+  test('Login With Wrong Creendial', async () => {
+    const loginData = {
+      email: 'dipronildas.net@gmail.com',
+      password: 'Dip@123456',
+    };
+    const response = await request(app).post('/auth/login').send(loginData);
+    const jsonResponse = JSON.parse(response.text);
+    expect(jsonResponse.message).toEqual(message.invalidCredientials);
+    expect(response.status).toEqual(400);
+    expect(response.status).not.toEqual(201);
+  });
+
+  test('Login With Not Verified Account', async () => {
+    const loginData = {
       email: 'test@example.com',
       password: 'Dip@12345',
     };
     const response = await request(app).post('/auth/login').send(loginData);
     const jsonResponse = JSON.parse(response.text);
-    expect(jsonResponse.message).toEqual(message.createSuccessfull);
-    expect(response.status).toEqual(200);
+    expect(jsonResponse.message).toEqual('Please Veriry Your Account');
+    expect(response.status).toEqual(400);
     expect(response.status).not.toEqual(201);
   });
 
