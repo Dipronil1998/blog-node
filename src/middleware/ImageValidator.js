@@ -22,9 +22,9 @@ const imageUpdateValidate = (req, res, next) => {
       return res.status(400).json({message: 'Image is not valid'});
     }
     next();
-  }else{
+  } else {
     next();
   }
 };
 
-module.exports = {imageValidate,imageUpdateValidate};
+module.exports = {imageValidate, imageUpdateValidate};

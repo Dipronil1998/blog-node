@@ -4,7 +4,7 @@ router.use(express.json({}));
 const authController=require('../controller/AuthController');
 const authValidator=require('../validator/AuthValidation');
 const {validationResult} = require('express-validator');
-const {verifyToken} = require('../middleware/verifytoken')
+const {verifyToken} = require('../middleware/verifytoken');
 const {imageValidate, imageUpdateValidate}=
   require('../middleware/ImageValidator');
 
@@ -29,7 +29,7 @@ upload = multer({
 const validateResult=(req, res, next)=>{
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({status:false,'error': errors.array()[0].msg});
+    return res.status(400).json({'status': false, 'error': errors.array()[0].msg});
   }
   next();
 };
@@ -51,10 +51,10 @@ router.post('/forgotpassword', authValidator.forgotPasswordValidator,
 router.post('/resetpassword/:id/:token', authValidator.resetPasswordValidator,
     validateResult, authController.userPasswordReset);
 
-router.put('/changepassword', verifyToken,authValidator.changePasswordValidator,
+router.put('/changepassword', verifyToken, authValidator.changePasswordValidator,
     validateResult, authController.changeUserPassword);
 
-router.put('/updateprofile', verifyToken,upload.single('profile'),authValidator.updateProfileValidator,
-    validateResult, imageUpdateValidate,authController.updateProfile);
+router.put('/updateprofile', verifyToken, upload.single('profile'), authValidator.updateProfileValidator,
+    validateResult, imageUpdateValidate, authController.updateProfile);
 
 module.exports = router;

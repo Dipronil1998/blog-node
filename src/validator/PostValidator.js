@@ -9,8 +9,8 @@ exports.postCreateValidator=[
       .notEmpty().withMessage('Post Body should not be empty')
       .bail().trim().isLength({min: 2})
       .withMessage('Post Title minimum 2 character'),
-  body('tag_id').isMongoId().withMessage("Please Provide Tag Id")
+  body('tag_id').isMongoId().withMessage('Please Provide Tag Id')
       .notEmpty().withMessage('Tag Should Not be Empty').bail(),
-  body('category_id').isMongoId().withMessage("Please Provide Category Id")
-    .notEmpty().withMessage('Category Should Not be Empty').bail(),
+  body('category_id').isMongoId().withMessage('Please Provide Category Id')
+      .notEmpty().withMessage('Category Should Not be Empty').bail(),
 ];

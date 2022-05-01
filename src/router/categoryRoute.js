@@ -5,7 +5,7 @@ const categoryController=require('../controller/CategoryController');
 const {verifyTokenAndAdmin} = require('../middleware/verifytoken');
 const categoryValidator=require('../validator/CategoryValidation');
 const {validationResult} = require('express-validator');
-const {imageValidate,imageUpdateValidate}=
+const {imageValidate, imageUpdateValidate}=
   require('../middleware/ImageValidator');
 
 const multer = require('multer');
@@ -29,7 +29,7 @@ upload = multer({
 const validateResult=(req, res, next)=>{
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({status:false,'error': errors.array()[0].msg});
+    return res.status(400).json({'status': false, 'error': errors.array()[0].msg});
   }
   next();
 };
