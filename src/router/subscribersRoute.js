@@ -18,4 +18,7 @@ const validateResult=(req, res, next)=>{
 router.post('', subscribersValidator.SubscribersValidator,
     validateResult, subscribersController.create);
 
+// DELETE operation
+router.delete('/:id', verifyTokenAndAdmin, subscribersController.delete);
+
 module.exports = router;
