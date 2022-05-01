@@ -92,7 +92,7 @@ exports.logIn = async (req, res) => {
           logger.error(message.invalidCredientials);
         }
       } else {
-        res.status(400).json({error: 'Please Veriry Your Account'});
+        res.status(400).json({status: false,message: 'Please Veriry Your Account'});
         logger.error('Please Veriry Your Account');
       }
     } else {
