@@ -3,7 +3,7 @@ const router = new express.Router();
 router.use(express.json({}));
 const authController=require('../controller/AuthController');
 const authValidator=require('../validator/AuthValidation');
-const {validationResult} = require('express-validator');
+const {validateResult} = require('../middleware/ValidateResult');
 const {verifyToken} = require('../middleware/verifytoken');
 const {imageValidate, imageUpdateValidate}=
   require('../middleware/ImageValidator');
@@ -25,14 +25,6 @@ upload = multer({
     fileSize: 1024 * 1024 * 2, // 2 mb file
   },
 });
-
-const validateResult=(req, res, next)=>{
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({'status': false, 'error': errors.array()[0].msg});
-  }
-  next();
-};
 
 router.post(
     '/signup',

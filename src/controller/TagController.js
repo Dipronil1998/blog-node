@@ -1,7 +1,7 @@
 const Tag = require('../model/tag');
 const message = require('../../config/constant');
 
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
   try {
     const name = req.body.name;
     const slug = name.toLowerCase();
