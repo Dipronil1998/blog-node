@@ -4,7 +4,7 @@ router.use(express.json({}));
 const categoryController=require('../controller/CategoryController');
 const {verifyTokenAndAdmin} = require('../middleware/verifytoken');
 const categoryValidator=require('../validator/CategoryValidation');
-const {validationResult} = require('express-validator');
+const {validateResult} = require('../middleware/ValidateResult');
 const {imageValidate, imageUpdateValidate}=
   require('../middleware/ImageValidator');
 
@@ -25,14 +25,6 @@ upload = multer({
     fileSize: 1024 * 1024 * 2, // 2 mb file
   },
 });
-
-const validateResult=(req, res, next)=>{
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({'status': false, 'error': errors.array()[0].msg});
-  }
-  next();
-};
 
 // create operation
 router.post('', verifyTokenAndAdmin, upload.single('image'),

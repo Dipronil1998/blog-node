@@ -4,7 +4,7 @@ router.use(express.json({}));
 const postController=require('../controller/PostController');
 const {verifyToken, verifyTokenAndAdmin} = require('../middleware/verifytoken');
 const postValidator=require('../validator/PostValidator');
-const {validationResult} = require('express-validator');
+const {validateResult} = require('../middleware/ValidateResult');
 const {imageValidate, imageUpdateValidate}=
   require('../middleware/ImageValidator');
 
@@ -26,13 +26,6 @@ upload = multer({
   },
 });
 
-const validateResult=(req, res, next)=>{
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({'status': false, 'error': errors.array()[0].msg});
-  }
-  next();
-};
 
 // create operation
 router.post('', verifyToken, upload.single('image'),
