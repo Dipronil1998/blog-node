@@ -37,7 +37,7 @@ exports.get = async (req, res) => {
 exports.getOne = async (req, res) => {
   try {
     const _id = req.params.id;
-    const tag = await Tag.findById({_id: _id}); ;
+    const tag = await Tag.findById({_id: _id}); 
     if (!tag) {
       res.status(400).json({message: message.dataNotFound});
     } else {

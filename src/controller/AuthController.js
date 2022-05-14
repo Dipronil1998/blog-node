@@ -83,6 +83,7 @@ exports.logIn = async (req, res) => {
         const isValid = await bcrypt.compare(password, emailuser.password);
         const token = await emailuser.generateAuthToken();
         if (isValid) {
+          await User.findOneAndUpdate({email: email}, {current_sign_in_at: Date.now()})
           res
               .status(200)
               .json({status: true, message: message.loginSuccessfully, token: token});

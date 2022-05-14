@@ -33,12 +33,11 @@ router.post('', verifyToken, upload.single('image'),
     validateResult, postController.create);
 
 
-// // read all data
-// router.get('', verifyTokenAndAdmin, validateResult, categoryController.get);
+// read all data
+router.get('', verifyToken, postController.get);
 
-// // read particualr data
-// router.get('/:id', verifyTokenAndAdmin, validateResult,
-//     categoryController.getOne);
+// read particualr data
+router.get('/:id', verifyToken, postController.getOne);
 
 
 // // update data by PATCH method by ID
