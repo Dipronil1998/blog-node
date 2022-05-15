@@ -2,10 +2,12 @@ const mongoose = require('mongoose');
 
 const postuserSchema= new mongoose.Schema({
   user_id: {
-    type: String,
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User'
   },
   post_id: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
   },
 }, {
   timestamps: true,

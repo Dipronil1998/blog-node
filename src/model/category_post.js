@@ -2,10 +2,12 @@ const mongoose = require('mongoose');
 
 const categorypostSchema= new mongoose.Schema({
   category_id: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category'
   },
   post_id: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
   },
 }, {
   timestamps: true,

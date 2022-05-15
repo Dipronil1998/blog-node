@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
 const UserSchema = new mongoose.Schema({
   role_id: {
     type: Number,
@@ -29,6 +30,9 @@ const UserSchema = new mongoose.Schema({
   },
   about: {
     type: String,
+  },
+  current_sign_in_at: {
+    type: Date,
   },
 }, {
   timestamps: true,

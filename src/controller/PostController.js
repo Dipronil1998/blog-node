@@ -17,6 +17,7 @@ exports.create = async (req, res) => {
     const tag = req.body.tag;
     const category = req.body.category;
     const slug = title.toLowerCase();
+    const status = req.body.status;
     const getTag = await Tag.find({ slug: tag.toLowerCase() });
     if (getTag.length === 0) {
       fs.unlinkSync(image);
@@ -40,6 +41,7 @@ exports.create = async (req, res) => {
         slug: slug,
         body: body,
         image: image,
+        status:status,
         is_approved: is_approved,
       });
       await post.save();
@@ -73,3 +75,31 @@ exports.create = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.get = async (req, res, next) => {
+  try {
+    const post = await Post.find();
+    if (post.length === 0) {
+      res.status(400).json({message: message.dataNotFound});
+    } else {
+      res.status(200).json(post);
+    }
+  } catch (error) {
+    next();
+    console.log(error);
+  }
+}
+
+exports.getOne = async (req, res, next) => {
+  try {
+    const _id = req.params.id;
+    const post = await Post.findById({_id: _id});
+    if (post.length === 0) {
+      res.status(400).json({message: message.dataNotFound});
+    } else {
+      res.status(200).json(post);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}

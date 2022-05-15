@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 const posttagSchema = new mongoose.Schema(
     {
       post_id: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
       },
       tag_id: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Tag'
       },
     },
     {
