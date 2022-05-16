@@ -176,13 +176,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/tag",
+					"raw": "localhost:3000/tags",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"tag"
+						"tags"
 					]
 				}
 			},
@@ -557,12 +557,12 @@
 					"formdata": [
 						{
 							"key": "title",
-							"value": "title23",
+							"value": "title27",
 							"type": "text"
 						},
 						{
 							"key": "body",
-							"value": "body1",
+							"value": "body24",
 							"type": "text"
 						},
 						{
@@ -579,6 +579,11 @@
 							"key": "image",
 							"type": "file",
 							"src": "/D:/image/img7.jpg"
+						},
+						{
+							"key": "status",
+							"value": "true",
+							"type": "text"
 						}
 					],
 					"options": {
@@ -677,6 +682,55 @@
 							"key": "search",
 							"value": "dipronildas.net@gmail.com"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get  All Post",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/post",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get One Post By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/post/6280ffbb7d5aa9b9c41704f3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"post",
+						"6280ffbb7d5aa9b9c41704f3"
 					]
 				}
 			},
