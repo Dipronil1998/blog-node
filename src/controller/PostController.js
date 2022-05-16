@@ -94,10 +94,12 @@ exports.getOne = async (req, res, next) => {
   try {
     const _id = req.params.id;
     const post = await Post.findById({_id: _id});
-    if (post.length === 0) {
-      res.status(400).json({message: message.dataNotFound});
+    const postCategory = await CategoryPost.find({post_id:_id}).populate('category_id');
+    const postTag = await PostTag.find({post_id:_id}).populate('tag_id')
+    if (!post) {
+      res.status(400).json({success: false,message: message.dataNotFound});
     } else {
-      res.status(200).json(post);
+      res.status(200).json({success: true,post:post,category:postCategory[0].category_id.name,tag:postTag[0].tag_id.name});
     }
   } catch (error) {
     console.log(error);
