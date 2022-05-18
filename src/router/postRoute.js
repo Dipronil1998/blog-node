@@ -39,6 +39,12 @@ router.get('', verifyToken, postController.get);
 // read particualr data
 router.get('/:id', verifyToken, postController.getOne);
 
+// Get Pending Post 
+router.get('/pending/post', verifyTokenAndAdmin, postController.pending);
+
+// Approved Pending Post
+router.put('/:id/approve', verifyTokenAndAdmin, postController.approved);
+
 
 // // update data by PATCH method by ID
 // router.put('/:id', verifyTokenAndAdmin, upload.single('image'),
