@@ -27,13 +27,32 @@ exports.create = async (req, res) => {
 
 exports.get = async (req, res) => {
   try {
-    const category = await Category.find();
+    console.log("AAA")
+    const category = await Category.aggregate([
+      {
+        $lookup:{
+          from: 'categoryposts',
+          localField: '_id',
+          foreignField: 'category_id',
+          as: 'post_info'
+        }
+      },
+      {
+        $project: {
+          name:1,
+          image:1,
+          count:{"$size":"$post_info"}
+        }
+      }
+    ]);
+
     if (category.length === 0) {
       res.status(400).json({message: message.dataNotFound});
     } else {
       res.status(200).send(category);
     }
   } catch (error) {
+    console.log(error)
     res.status(500).send(error);
   }
 };
