@@ -25,9 +25,8 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.get = async (req, res) => {
+exports.get = async (req, res,next) => {
   try {
-    console.log("AAA")
     const category = await Category.aggregate([
       {
         $lookup:{
@@ -41,7 +40,9 @@ exports.get = async (req, res) => {
         $project: {
           name:1,
           image:1,
-          count:{"$size":"$post_info"}
+          count:{"$size":"$post_info"},
+          createdAt:1,
+          updatedAt:1
         }
       }
     ]);
@@ -52,8 +53,8 @@ exports.get = async (req, res) => {
       res.status(200).send(category);
     }
   } catch (error) {
-    console.log(error)
-    res.status(500).send(error);
+    // res.status(500).send(error);
+    next(error)
   }
 };
 

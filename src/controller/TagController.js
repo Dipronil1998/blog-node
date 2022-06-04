@@ -23,7 +23,25 @@ exports.create = async (req, res, next) => {
 
 exports.get = async (req, res) => {
   try {
-    const tag = await Tag.find();
+    const tag = await Tag.aggregate([
+      {
+        $lookup:{
+          from: 'posttags',
+          localField: '_id',
+          foreignField: 'tag_id',
+          as: 'post_info'
+        }
+      },
+      {
+        $project: {
+          name:1,
+          image:1,
+          count:{"$size":"$post_info"},
+          createdAt:1,
+          updatedAt:1
+        }
+      }
+    ]);
     if (tag.length === 0) {
       res.status(400).json({message: message.dataNotFound});
     } else {
