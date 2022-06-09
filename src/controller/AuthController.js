@@ -64,7 +64,6 @@ exports.verifyOtp = async (req, res) => {
       logger.error('Your OTP is Invalid.');
     }
   } catch (error) {
-    console.log(error);
     res.status(400).json(error);
     logger.error(error);
   }
