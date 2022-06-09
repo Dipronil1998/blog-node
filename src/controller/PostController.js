@@ -135,5 +135,25 @@ exports.approved = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error)
+    next(error);
   }
-}
+};
+
+// exports.postByCategory = async(req,res,next)=>{
+//   try {
+//     const category = req.params.category;
+//     const postByCategory = await Post.aggregate([
+//       {
+//         $lookup:{
+//           from: 'categoryposts',
+//           localField: '_id',
+//           foreignField: 'category_id',
+//           as: 'post_info'
+//         }
+//       }
+//     ])
+//   } catch (error) {
+//     console.log(error)
+//     next(error)
+//   }
+// }
