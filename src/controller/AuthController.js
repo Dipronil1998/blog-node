@@ -55,7 +55,9 @@ exports.verifyOtp = async (req, res) => {
     const otp = req.body.otp;
     const otpInfo = await Otp.findOne({user_id: _id});
     if (otpInfo && otp === otpInfo.OTP && moment().format('hh:mm:ss')<=otpInfo.expairAt) {
+      console.log();
       await User.findByIdAndUpdate({_id: _id}, {account_verified: true});
+      await Otp.updateOne({user_id: _id},{expairAt: moment().format('hh:mm:ss')})
       res.status(200).json({status: true, message: message.createSuccessfull});
       logger.info(message.createSuccessfull);
     } else {
@@ -63,6 +65,7 @@ exports.verifyOtp = async (req, res) => {
       logger.error('Your OTP is Invalid.');
     }
   } catch (error) {
+    console.log(error);
     res.status(400).json(error);
     logger.error(error);
   }
