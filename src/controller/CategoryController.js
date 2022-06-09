@@ -25,16 +25,36 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.get = async (req, res) => {
+exports.get = async (req, res,next) => {
   try {
-    const category = await Category.find();
+    const category = await Category.aggregate([
+      {
+        $lookup:{
+          from: 'categoryposts',
+          localField: '_id',
+          foreignField: 'category_id',
+          as: 'post_info'
+        }
+      },
+      {
+        $project: {
+          name:1,
+          image:1,
+          count:{"$size":"$post_info"},
+          createdAt:1,
+          updatedAt:1
+        }
+      }
+    ]);
+
     if (category.length === 0) {
       res.status(400).json({message: message.dataNotFound});
     } else {
       res.status(200).send(category);
     }
   } catch (error) {
-    res.status(500).send(error);
+    // res.status(500).send(error);
+    next(error)
   }
 };
 
@@ -97,3 +117,5 @@ exports.delete = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+

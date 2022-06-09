@@ -105,3 +105,55 @@ exports.getOne = async (req, res, next) => {
     console.log(error);
   }
 }
+
+exports.pending = async (req, res, next) => {
+  try {
+    const pendingPost = await Post.find({is_approved:false})
+    if(pendingPost.length === 0){
+      res.status(400).json({success: false,message: message.dataNotFound});
+    } else {
+      res.status(200).json({success: true, message: pendingPost})
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+exports.approved = async (req, res, next) => {
+  try {
+    const _id = req.params.id;
+    const post = await Post.findById({_id: _id});
+    if (!post) {
+      res.status(400).json({success:false,message: message.dataNotFound});
+    } else {
+      if(post.is_approved == true){
+        res.status(200).json({success:false,message: 'Post Already Approved'});
+      } else {
+        await Post.findByIdAndUpdate({_id: _id}, {is_approved:true});
+        res.status(200).json({success:true,message: 'Post Successfully Approved'});
+      }
+    }
+  } catch (error) {
+    console.log(error)
+    next(error);
+  }
+};
+
+// exports.postByCategory = async(req,res,next)=>{
+//   try {
+//     const category = req.params.category;
+//     const postByCategory = await Post.aggregate([
+//       {
+//         $lookup:{
+//           from: 'categoryposts',
+//           localField: '_id',
+//           foreignField: 'category_id',
+//           as: 'post_info'
+//         }
+//       }
+//     ])
+//   } catch (error) {
+//     console.log(error)
+//     next(error)
+//   }
+// }
