@@ -444,7 +444,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"otp\":\"499582\"\n}",
+					"raw": "{\n    \"otp\":\"839010\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -452,7 +452,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/auth/verifyotp/626cdcb84ec673384c485745",
+					"raw": "localhost:3000/auth/verifyotp/62a21f4fe23450821b913f19",
 					"host": [
 						"localhost"
 					],
@@ -460,7 +460,7 @@
 					"path": [
 						"auth",
 						"verifyotp",
-						"626cdcb84ec673384c485745"
+						"62a21f4fe23450821b913f19"
 					]
 				}
 			},
@@ -557,12 +557,12 @@
 					"formdata": [
 						{
 							"key": "title",
-							"value": "title27",
+							"value": "title28",
 							"type": "text"
 						},
 						{
 							"key": "body",
-							"value": "body24",
+							"value": "body25",
 							"type": "text"
 						},
 						{
@@ -578,7 +578,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "/D:/image/img7.jpg"
+							"src": "/D:/image/img14.jpg"
 						},
 						{
 							"key": "status",
@@ -731,6 +731,84 @@
 					"path": [
 						"post",
 						"6280ffbb7d5aa9b9c41704f3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Pending Post",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/post/pending/post",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"post",
+						"pending",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Approve Post",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/post/6283e20c32d00aff048adb5e/approve",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"post",
+						"6283e20c32d00aff048adb5e",
+						"approve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Promoted to Admin",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/auth/enableadmin/626cdcb84ec673384c485745",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"enableadmin",
+						"626cdcb84ec673384c485745"
 					]
 				}
 			},
