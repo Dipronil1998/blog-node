@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const logger= require('../utils/logger');
 
+/**
+ * DB Connect
+ */
 function dbConnect() {
   mongoose.connect(process.env.url, {
     // useCreateIndex:true,
@@ -17,7 +20,9 @@ function dbConnect() {
   });
 }
 
-
+/**
+ * DB Disconnect
+ */
 function dbDisconnect() {
   mongoose.disconnect();
 }

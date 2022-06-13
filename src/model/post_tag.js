@@ -4,11 +4,11 @@ const posttagSchema = new mongoose.Schema(
     {
       post_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post'
+        ref: 'Post',
       },
       tag_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Tag'
+        ref: 'Tag',
       },
     },
     {
@@ -16,5 +16,6 @@ const posttagSchema = new mongoose.Schema(
     },
 );
 
+// eslint-disable-next-line
 const PostTag = new mongoose.model('PostTag', posttagSchema);
 module.exports = PostTag;

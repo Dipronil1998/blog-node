@@ -1,4 +1,3 @@
-const express = require('express');
 const logger= require('./utils/logger');
 const app = require('../config/app');
 port = process.env.PORT || 3001;

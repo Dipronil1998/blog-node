@@ -25,5 +25,6 @@ categorySchema.methods.toJSON=function() {
   return categoryObjects;
 };
 
+// eslint-disable-next-line
 const Category= new mongoose.model('Category', categorySchema);
 module.exports=Category;

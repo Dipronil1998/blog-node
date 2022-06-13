@@ -35,5 +35,6 @@ const postSchema= new mongoose.Schema({
   timestamps: true,
 });
 
+// eslint-disable-next-line
 const Post= new mongoose.model('Post', postSchema);
 module.exports=Post;

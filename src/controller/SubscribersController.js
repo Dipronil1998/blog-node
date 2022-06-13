@@ -12,7 +12,10 @@ exports.create = async (req, res) => {
       await subscriber.save();
       res.status(201).json({status: true, message: 'Email Subscription Added'});
     } else {
-      res.status(400).json({status: false, message: 'Email Subscription Already Added'});
+      res.status(400).json({
+        status: false,
+        message: 'Email Subscription Already Added',
+      });
     }
   } catch (error) {
     res.status(400).send(error);
@@ -22,13 +25,14 @@ exports.create = async (req, res) => {
 exports.find = async (req, res) => {
   try {
     const search = req.query.search;
-    if(search){
-      var subscribers = await Subscribers.find({email:search});
-    }else{
-      var subscribers = await Subscribers.find();
+    let subscribers;
+    if (search) {
+      subscribers = await Subscribers.find({email: search});
+    } else {
+      subscribers = await Subscribers.find();
     }
     if (subscribers.length === 0) {
-      res.status(400).json({status: false,message: message.dataNotFound});
+      res.status(400).json({status: false, message: message.dataNotFound});
     } else {
       res.status(200).json(subscribers);
     }
@@ -42,9 +46,14 @@ exports.delete = async (req, res)=>{
     const _id = req.params.id;
     const getSubcribers = await Subscribers.findByIdAndDelete({_id: _id});
     if (!getSubcribers) {
-      res.status(400).json({status: false, message: 'Email Subscription Doesn\'t Exists'});
+      res.status(400)
+          .json({status: false, message: 'Email Subscription Doesn\'t Exists'});
     } else {
-      res.status(200).json({status: true, message: 'Email Subscription Delete Successfully'});
+      res.status(200)
+          .json({
+            status: true,
+            message: 'Email Subscription Delete Successfully',
+          });
     }
   } catch (error) {
     res.status(400).send(error);

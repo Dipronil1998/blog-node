@@ -10,5 +10,6 @@ exports.postCreateValidator=[
       .bail().trim().isLength({min: 2})
       .withMessage('Post Title minimum 2 character'),
   body('tag').notEmpty().withMessage('Tag Should Not be Empty').bail(),
-  body('category').notEmpty().withMessage('Category Should Not be Empty').bail(),
+  body('category').notEmpty().withMessage('Category Should Not be Empty')
+      .bail(),
 ];

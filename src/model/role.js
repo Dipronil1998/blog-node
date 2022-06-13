@@ -15,5 +15,6 @@ const roleSchema= new mongoose.Schema({
   timestamps: true,
 });
 
+// eslint-disable-next-line
 const Role= new mongoose.model('Role', roleSchema);
 module.exports=Role;

@@ -8,7 +8,7 @@ app.use(express.json({}));
 
 port = process.env.PORT || 3001;
 const {pageNotFound} = require('../src/middleware/PageNotFound');
-const {errorHandler} = require('../src/middleware/ErrorHandler')
+const {errorHandler} = require('../src/middleware/ErrorHandler');
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -25,7 +25,7 @@ const postRoute = require('../src/router/postRoute');
 const subscribersRoute=require('../src/router/subscribersRoute');
 
 app.use('/auth/', UserRouter);
-app.use('/category/', categoryRouter); 
+app.use('/category/', categoryRouter);
 app.use('/tag/', tagRouter);
 app.use('/post/', postRoute);
 app.use('/subscribers/', subscribersRoute);

@@ -5,7 +5,7 @@ const authController=require('../controller/AuthController');
 const authValidator=require('../validator/AuthValidation');
 const {validateResult} = require('../middleware/ValidateResult');
 const {verifyToken, verifyTokenAndAdmin} = require('../middleware/verifytoken');
-const {imageValidate, imageUpdateValidate}=
+const {imageUpdateValidate}=
   require('../middleware/ImageValidator');
 
 const multer = require('multer');
@@ -43,12 +43,14 @@ router.post('/forgotpassword', authValidator.forgotPasswordValidator,
 router.post('/resetpassword/:id/:token', authValidator.resetPasswordValidator,
     validateResult, authController.userPasswordReset);
 
-router.put('/changepassword', verifyToken, authValidator.changePasswordValidator,
+router.put('/changepassword', verifyToken,
+    authValidator.changePasswordValidator,
     validateResult, authController.changeUserPassword);
 
-router.put('/updateprofile', verifyToken, upload.single('profile'), authValidator.updateProfileValidator,
+router.put('/updateprofile', verifyToken, upload.single('profile'),
+    authValidator.updateProfileValidator,
     validateResult, imageUpdateValidate, authController.updateProfile);
 
-router.put('/enableadmin/:id', verifyTokenAndAdmin , authController.enableAdmin);
+router.put('/enableadmin/:id', verifyTokenAndAdmin, authController.enableAdmin);
 
 module.exports = router;

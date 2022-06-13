@@ -25,22 +25,22 @@ exports.get = async (req, res) => {
   try {
     const tag = await Tag.aggregate([
       {
-        $lookup:{
+        $lookup: {
           from: 'posttags',
           localField: '_id',
           foreignField: 'tag_id',
-          as: 'post_info'
-        }
+          as: 'post_info',
+        },
       },
       {
         $project: {
-          name:1,
-          image:1,
-          count:{"$size":"$post_info"},
-          createdAt:1,
-          updatedAt:1
-        }
-      }
+          name: 1,
+          image: 1,
+          count: {'$size': '$post_info'},
+          createdAt: 1,
+          updatedAt: 1,
+        },
+      },
     ]);
     if (tag.length === 0) {
       res.status(400).json({message: message.dataNotFound});
@@ -55,7 +55,7 @@ exports.get = async (req, res) => {
 exports.getOne = async (req, res) => {
   try {
     const _id = req.params.id;
-    const tag = await Tag.findById({_id: _id}); 
+    const tag = await Tag.findById({_id: _id});
     if (!tag) {
       res.status(400).json({message: message.dataNotFound});
     } else {

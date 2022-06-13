@@ -23,5 +23,6 @@ tagSchema.methods.toJSON=function() {
   return tagObjects;
 };
 
+// eslint-disable-next-line
 const Tag= new mongoose.model('Tag', tagSchema);
 module.exports=Tag;

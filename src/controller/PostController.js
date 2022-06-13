@@ -1,7 +1,7 @@
 const Post = require('../model/post');
 const Tag = require('../model/tag');
 const Category = require('../model/category');
-const Subscribers = require('../model/subscribers')
+const Subscribers = require('../model/subscribers');
 const PostUser = require('../model/post_user');
 const CategoryPost = require('../model/category_post');
 const PostTag = require('../model/post_tag');
@@ -18,17 +18,17 @@ exports.create = async (req, res) => {
     const category = req.body.category;
     const slug = title.toLowerCase();
     const status = req.body.status;
-    const getTag = await Tag.find({ slug: tag.toLowerCase() });
+    const getTag = await Tag.find({slug: tag.toLowerCase()});
     if (getTag.length === 0) {
       fs.unlinkSync(image);
-      return res.status(404).json({ status: false, message: 'Tag Not Exists' })
+      return res.status(404).json({status: false, message: 'Tag Not Exists'});
     }
-    const getCategory = await Category.find({ slug: category.toLowerCase() });
+    const getCategory = await Category.find({slug: category.toLowerCase()});
     if (getCategory.length === 0) {
       fs.unlinkSync(image);
-      return res.status(404).json({ status: false, message: 'Category Not Exists' })
+      return res.status(404).json({status: false, message: 'Category Not Exists'});
     }
-    const getPost = await Post.findOne({ slug: slug });
+    const getPost = await Post.findOne({slug: slug});
     if (!getPost) {
       if (req.user.role_id === 1) {
         is_approved = true;
@@ -41,7 +41,7 @@ exports.create = async (req, res) => {
         slug: slug,
         body: body,
         image: image,
-        status:status,
+        status: status,
         is_approved: is_approved,
       });
       await post.save();
@@ -57,7 +57,7 @@ exports.create = async (req, res) => {
         post_id: post._id,
         tag_id: getTag[0]._id,
       }).save();
-      res.status(201).json({ status: true, message: 'Post Created Successfully' });
+      res.status(201).json({status: true, message: 'Post Created Successfully'});
       const subscribers = await Subscribers.find();
       for (i = 0; i < subscribers.length; i++) {
         sendMail({
@@ -69,7 +69,7 @@ exports.create = async (req, res) => {
       }
     } else {
       fs.unlinkSync(image);
-      res.status(400).json({ status: false, message: 'Post Already Exists' });
+      res.status(400).json({status: false, message: 'Post Already Exists'});
     }
   } catch (error) {
     console.log(error);
@@ -88,53 +88,53 @@ exports.get = async (req, res, next) => {
     next();
     console.log(error);
   }
-}
+};
 
 exports.getOne = async (req, res, next) => {
   try {
     const _id = req.params.id;
     const post = await Post.findById({_id: _id});
-    const postCategory = await CategoryPost.find({post_id:_id}).populate('category_id');
-    const postTag = await PostTag.find({post_id:_id}).populate('tag_id')
+    const postCategory = await CategoryPost.find({post_id: _id}).populate('category_id');
+    const postTag = await PostTag.find({post_id: _id}).populate('tag_id');
     if (!post) {
-      res.status(400).json({success: false,message: message.dataNotFound});
+      res.status(400).json({success: false, message: message.dataNotFound});
     } else {
-      res.status(200).json({success: true,post:post,category:postCategory[0].category_id.name,tag:postTag[0].tag_id.name});
+      res.status(200).json({success: true, post: post, category: postCategory[0].category_id.name, tag: postTag[0].tag_id.name});
     }
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 exports.pending = async (req, res, next) => {
   try {
-    const pendingPost = await Post.find({is_approved:false})
-    if(pendingPost.length === 0){
-      res.status(400).json({success: false,message: message.dataNotFound});
+    const pendingPost = await Post.find({is_approved: false});
+    if (pendingPost.length === 0) {
+      res.status(400).json({success: false, message: message.dataNotFound});
     } else {
-      res.status(200).json({success: true, message: pendingPost})
+      res.status(200).json({success: true, message: pendingPost});
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 exports.approved = async (req, res, next) => {
   try {
     const _id = req.params.id;
     const post = await Post.findById({_id: _id});
     if (!post) {
-      res.status(400).json({success:false,message: message.dataNotFound});
+      res.status(400).json({success: false, message: message.dataNotFound});
     } else {
-      if(post.is_approved == true){
-        res.status(200).json({success:false,message: 'Post Already Approved'});
+      if (post.is_approved == true) {
+        res.status(200).json({success: false, message: 'Post Already Approved'});
       } else {
-        await Post.findByIdAndUpdate({_id: _id}, {is_approved:true});
-        res.status(200).json({success:true,message: 'Post Successfully Approved'});
+        await Post.findByIdAndUpdate({_id: _id}, {is_approved: true});
+        res.status(200).json({success: true, message: 'Post Successfully Approved'});
       }
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     next(error);
   }
 };

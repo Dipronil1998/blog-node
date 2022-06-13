@@ -6,7 +6,8 @@ exports.signInValidator=[
       .isLength({min: 2, max: 15})
       .withMessage('Name maximum 15 character'),
   body('email').isEmail().withMessage('Please Enter a valid Email')
-      .normalizeEmail({gmail_remove_dots: false}).notEmpty().withMessage('Email should not be empty!'),
+      .normalizeEmail({gmail_remove_dots: false})
+      .notEmpty().withMessage('Email should not be empty!'),
   body('password').trim()
       .matches(/^(?=.{8,32})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/)
       .withMessage(`Password should be a alphanumeric,
@@ -18,7 +19,8 @@ exports.signInValidator=[
 
 exports.logInValidator=[
   body('email').isEmail().withMessage('Please Enter a valid Email')
-      .normalizeEmail({gmail_remove_dots: false}).notEmpty().withMessage('Email should not be empty!'),
+      .normalizeEmail({gmail_remove_dots: false})
+      .notEmpty().withMessage('Email should not be empty!'),
   body('password').trim()
       .notEmpty().withMessage('Password should not be empty!'),
 ];
@@ -32,6 +34,7 @@ exports.resetPasswordValidator=[
   body('password').trim()
       .notEmpty().withMessage('Password should not be empty!')
       .matches(/^(?=.{8,32})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/)
+      // eslint-disable-next-line
       .withMessage(`Password should be a alphanumeric, spcial character and minium 8 Bit long`),
   body('confirm_password').trim()
       .notEmpty().withMessage('Confirm Password should not be empty!'),
@@ -42,13 +45,15 @@ exports.changePasswordValidator=[
   body('password').trim()
       .notEmpty().withMessage('Password should not be empty!')
       .matches(/^(?=.{8,32})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/)
+      // eslint-disable-next-line
       .withMessage(`Password should be a alphanumeric, spcial character and minium 8 Bit long`),
   body('confirm_password').trim()
       .notEmpty().withMessage('Confirm Password should not be empty!'),
 ];
 
 exports.updateProfileValidator = [
-  body('name').isAlpha('en-US', {ignore: ' '}).withMessage('Name should be alphabetic')
+  body('name').isAlpha('en-US', {ignore: ' '})
+      .withMessage('Name should be alphabetic')
       .optional({nullable: true})
       .isLength({min: 2, max: 15})
       .withMessage('Name maximum 15 character'),
