@@ -4,7 +4,7 @@ router.use(express.json({}));
 const authController=require('../controller/AuthController');
 const authValidator=require('../validator/AuthValidation');
 const {validateResult} = require('../middleware/ValidateResult');
-const {verifyToken} = require('../middleware/verifytoken');
+const {verifyToken, verifyTokenAndAdmin} = require('../middleware/verifytoken');
 const {imageValidate, imageUpdateValidate}=
   require('../middleware/ImageValidator');
 
@@ -48,5 +48,7 @@ router.put('/changepassword', verifyToken, authValidator.changePasswordValidator
 
 router.put('/updateprofile', verifyToken, upload.single('profile'), authValidator.updateProfileValidator,
     validateResult, imageUpdateValidate, authController.updateProfile);
+
+router.put('/enableadmin/:id', verifyTokenAndAdmin , authController.enableAdmin);
 
 module.exports = router;
