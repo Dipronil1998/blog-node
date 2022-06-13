@@ -224,8 +224,22 @@ exports.updateProfile = async (req, res)=>{
     if (newProfilePic) {
       fs.unlinkSync(oldProfilePic);
     }
-    res.status(200).json({status: true, message: 'Profile Updated Successfully'});
+    res.status(200).json({success: true, message: 'Profile Updated Successfully'});
   } catch (error) {
     console.log(error);
   }
 };
+
+exports.enableAdmin = async(req,res,next)=>{
+  try {
+    const _id = req.params.id;
+    const enableAdmin = await User.findByIdAndUpdate({_id:_id}, { role_id : 1});
+    if(enableAdmin){
+      res.status(200).json({success: true,message: 'User Promoted to Admin'});
+    } else {
+      res.status(404).json({success: false,message: message.dataNotFound});
+    }
+  } catch (error) {
+    next(error)
+  }
+}
