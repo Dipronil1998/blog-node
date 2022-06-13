@@ -5,8 +5,7 @@ const postController=require('../controller/PostController');
 const {verifyToken, verifyTokenAndAdmin} = require('../middleware/verifytoken');
 const postValidator=require('../validator/PostValidator');
 const {validateResult} = require('../middleware/ValidateResult');
-const {imageValidate, imageUpdateValidate}=
-  require('../middleware/ImageValidator');
+const {imageValidate}= require('../middleware/ImageValidator');
 
 const multer = require('multer');
 let upload = multer({dest: './asset/image/post/'});
@@ -39,7 +38,7 @@ router.get('', verifyToken, postController.get);
 // read particualr data
 router.get('/:id', verifyToken, postController.getOne);
 
-// Get Pending Post 
+// Get Pending Post
 router.get('/pending/post', verifyTokenAndAdmin, postController.pending);
 
 // Approved Pending Post

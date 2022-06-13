@@ -22,5 +22,6 @@ const otpSchema = new mongoose.Schema({
   },
 });
 
+// eslint-disable-next-line
 const Otp = new mongoose.model('Otp', otpSchema);
 module.exports = Otp;

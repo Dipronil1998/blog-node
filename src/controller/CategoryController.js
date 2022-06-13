@@ -15,7 +15,11 @@ exports.create = async (req, res) => {
         image: image,
       });
       await category.save();
-      res.status(201).json({status: true, message: 'Category Created Successfully'});
+      res.status(201)
+          .json({
+            status: true,
+            message: 'Category Created Successfully',
+          });
     } else {
       fs.unlinkSync(image);
       res.status(400).json({status: false, message: 'Category Already Exists'});
@@ -25,26 +29,26 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.get = async (req, res,next) => {
+exports.get = async (req, res, next) => {
   try {
     const category = await Category.aggregate([
       {
-        $lookup:{
+        $lookup: {
           from: 'categoryposts',
           localField: '_id',
           foreignField: 'category_id',
-          as: 'post_info'
-        }
+          as: 'post_info',
+        },
       },
       {
         $project: {
-          name:1,
-          image:1,
-          count:{"$size":"$post_info"},
-          createdAt:1,
-          updatedAt:1
-        }
-      }
+          name: 1,
+          image: 1,
+          count: {'$size': '$post_info'},
+          createdAt: 1,
+          updatedAt: 1,
+        },
+      },
     ]);
 
     if (category.length === 0) {
@@ -54,7 +58,7 @@ exports.get = async (req, res,next) => {
     }
   } catch (error) {
     // res.status(500).send(error);
-    next(error)
+    next(error);
   }
 };
 
@@ -78,7 +82,11 @@ exports.update = async (req, res) => {
     const _id = req.params.id;
     const getCategory = await Category.findById({_id: _id});
     if (!getCategory) {
-      return res.status(404).json({status: false, message: message.dataNotFound});
+      return res.status(404)
+          .json({
+            success: false,
+            message: message.dataNotFound,
+          });
     } else {
       const oldImage = getCategory.image;
       const name = req.body.name || getCategory.name;
@@ -94,10 +102,13 @@ exports.update = async (req, res) => {
       if (newImage) {
         fs.unlinkSync(oldImage);
       }
-      res.status(200).json({status: true, message: 'Category Update Successfully'});
+      res.status(200)
+          .json({
+            status: true,
+            message: 'Category Update Successfully',
+          });
     }
   } catch (error) {
-    console.log(error);
     res.status(400).send(error);
   }
 };
@@ -111,7 +122,11 @@ exports.delete = async (req, res) => {
     } else {
       const path = category.image;
       fs.unlinkSync(path);
-      res.status(200).json({status: true, message: 'Category Delete Successfully'});
+      res.status(200)
+          .json({
+            status: true,
+            message: 'Category Delete Successfully',
+          });
     }
   } catch (error) {
     res.status(500).send(error);

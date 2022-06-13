@@ -33,10 +33,18 @@ exports.signUp = async (req, res) => {
           html: `<h5>Hi ${user.name}</h5><p>Your OTP is: <b>${otp}</b>, 
           Valid for 10 minutes. Please do not share OTP with anyone.</p>`,
         });
-        res.status(201).json({status: true, message: `OTP Sent To ${user.email}`});
+        res.status(201)
+            .json({
+              status: true,
+              message: `OTP Sent To ${user.email}`,
+            });
         logger.info(`OTP Sent To ${user.email}`);
       } else {
-        res.status(400).json({status: false, message: message.passwordMismatched});
+        res.status(400)
+            .json({
+              status: false,
+              message: message.passwordMismatched,
+            });
         logger.error(message.passwordMismatched);
       }
     } else {
@@ -54,9 +62,11 @@ exports.verifyOtp = async (req, res) => {
     const _id = req.params.id;
     const otp = req.body.otp;
     const otpInfo = await Otp.findOne({user_id: _id});
-    if (otpInfo && otp === otpInfo.OTP && moment().format('hh:mm:ss')<=otpInfo.expairAt) {
+    if (otpInfo && otp === otpInfo.OTP &&
+      moment().format('hh:mm:ss')<=otpInfo.expairAt) {
       await User.findByIdAndUpdate({_id: _id}, {account_verified: true});
-      await Otp.updateOne({user_id: _id},{expairAt: moment().format('hh:mm:ss')})
+      await Otp.updateOne({user_id: _id},
+          {expairAt: moment().format('hh:mm:ss')});
       res.status(200).json({status: true, message: message.createSuccessfull});
       logger.info(message.createSuccessfull);
     } else {
@@ -84,17 +94,30 @@ exports.logIn = async (req, res) => {
         const isValid = await bcrypt.compare(password, emailuser.password);
         const token = await emailuser.generateAuthToken();
         if (isValid) {
-          await User.findOneAndUpdate({email: email}, {current_sign_in_at: Date.now()})
+          await User.findOneAndUpdate({email: email},
+              {current_sign_in_at: Date.now()});
           res
               .status(200)
-              .json({status: true, message: message.loginSuccessfully, token: token});
+              .json({
+                status: true,
+                message: message.loginSuccessfully,
+                token: token,
+              });
           logger.info(message.loginSuccessfully);
         } else {
-          res.status(400).json({status: false, message: message.invalidCredientials});
+          res.status(400)
+              .json({
+                status: false,
+                message: message.invalidCredientials,
+              });
           logger.error(message.invalidCredientials);
         }
       } else {
-        res.status(400).json({status: false,message: 'Please Veriry Your Account'});
+        res.status(400)
+            .json({
+              status: false,
+              message: 'Please Veriry Your Account',
+            });
         logger.error('Please Veriry Your Account');
       }
     } else {
@@ -173,7 +196,7 @@ exports.userPasswordReset = async (req, res) => {
   }
 };
 
-exports.changeUserPassword = async (req, res) => {
+exports.changeUserPassword = async (req, res, next) => {
   try {
     // const oldPassword = req.body.old_password
     const password = req.body.password;
@@ -202,7 +225,7 @@ exports.changeUserPassword = async (req, res) => {
       res.send({status: 'failed', message: 'All Fields are Required'});
     }
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -224,22 +247,26 @@ exports.updateProfile = async (req, res)=>{
     if (newProfilePic) {
       fs.unlinkSync(oldProfilePic);
     }
-    res.status(200).json({success: true, message: 'Profile Updated Successfully'});
+    res.status(200)
+        .json({
+          success: true,
+          message: 'Profile Updated Successfully',
+        });
   } catch (error) {
     console.log(error);
   }
 };
 
-exports.enableAdmin = async(req,res,next)=>{
+exports.enableAdmin = async (req, res, next)=>{
   try {
     const _id = req.params.id;
-    const enableAdmin = await User.findByIdAndUpdate({_id:_id}, { role_id : 1});
-    if(enableAdmin){
-      res.status(200).json({success: true,message: 'User Promoted to Admin'});
+    const enableAdmin = await User.findByIdAndUpdate({_id: _id}, {role_id: 1});
+    if (enableAdmin) {
+      res.status(200).json({success: true, message: 'User Promoted to Admin'});
     } else {
-      res.status(404).json({success: false,message: message.dataNotFound});
+      res.status(404).json({success: false, message: message.dataNotFound});
     }
   } catch (error) {
-    next(error)
+    next(error);
   }
-}
+};

@@ -63,9 +63,10 @@ UserSchema.methods.generateAuthToken = async function() {
     await this.save();
     return token;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
+// eslint-disable-next-line
 const User = new mongoose.model('User', UserSchema);
 module.exports = User;

@@ -9,5 +9,6 @@ const subscribersSchema= new mongoose.Schema({
   timestamps: true,
 });
 
+// eslint-disable-next-line
 const Subscribers= new mongoose.model('Subscribers', subscribersSchema);
 module.exports=Subscribers;
