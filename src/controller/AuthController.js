@@ -4,11 +4,12 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const message = require('../../config/constant');
 const sendMail = require('../middleware/mail');
+const mailTemplate = require('../utils/MailFormat');
 const logger = require('../utils/logger');
 const moment = require('moment');
 const fs = require('fs');
 
-exports.signUp = async (req, res) => {
+exports.signUp = async (req, res, next) => {
   try {
     const {name, email, password, confirm_password} = req.body;
     const emailuser = await User.findOne({email: email});
@@ -26,13 +27,7 @@ exports.signUp = async (req, res) => {
           user_id: user._id,
           OTP: otp,
         }).save();
-        sendMail({
-          from: process.env.EMAIL,
-          to: user.email,
-          subject: 'Verify OTP',
-          html: `<h5>Hi ${user.name}</h5><p>Your OTP is: <b>${otp}</b>, 
-          Valid for 10 minutes. Please do not share OTP with anyone.</p>`,
-        });
+        mailTemplate.mailOtp(user.name, user.email, otp);
         res.status(201)
             .json({
               status: true,
@@ -52,8 +47,10 @@ exports.signUp = async (req, res) => {
       logger.error('User Already Exists');
     }
   } catch (error) {
+    console.log(error);
     res.status(400).json(error);
     logger.error(error);
+    next(error);
   }
 };
 
