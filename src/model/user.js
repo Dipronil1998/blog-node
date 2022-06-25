@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+const {salt,secretKey} = require('../../config/bootstrap');
 
 const UserSchema = new mongoose.Schema({
   role_id: {
@@ -40,7 +40,7 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.pre('save', async function(next) {
   if (this.isModified('password')) {
-    this.password = await bcrypt.hash(this.password, 12);
+    this.password = await bcrypt.hash(this.password, salt);
   }
   next();
 });
@@ -58,7 +58,7 @@ UserSchema.methods.generateAuthToken = async function() {
       _id: this._id,
       role_id: this.role_id,
     },
-    process.env.SECRET_KEY,
+    secretKey,
     {expiresIn: '1h'});
     await this.save();
     return token;

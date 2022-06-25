@@ -7,8 +7,8 @@
     "test": "env-cmd -f ./config/test.env jest",
     "test-watch": "env-cmd -f ./config/test.env jest --watch",
     "test-cover": "env-cmd -f ./config/test.env jest --coverage",
-    "start": "env-cmd -f ./config/dev.env nodemon ./src/index.js",
-    "seed": "env-cmd -f ./config/dev.env node ./config/seeds/seed.js",
+    "start": "NODE_ENV=development nodemon ./src/index.js",
+    "seed": "NODE_ENV=development node ./config/seeds/seed.js",
     "seed-test": "env-cmd -f ./config/test.env node ./config/seeds/seed.js",
     "lint": "./node_modules/.bin/eslint ./src/index.js ./src/**/**.js ./config/**.js ./config/seeds/**.js ./test/**/**.js",
     "lint-fix": "./node_modules/.bin/eslint ./src/index.js ./src/**/**.js ./config/**.js ./config/seeds/**.js ./test/**/**.js --fix"
@@ -37,6 +37,7 @@
     "winston": "^3.6.0"
   },
   "devDependencies": {
+    "envalid": "^7.3.1",
     "eslint": "^8.9.0",
     "eslint-config-google": "^0.14.0"
   }
