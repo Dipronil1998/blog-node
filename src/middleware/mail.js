@@ -1,12 +1,13 @@
 const nodemailer = require('nodemailer');
+const {emailId,password} = require('../../config/bootstrap');
 
 const mailTransporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 465,
   secure: true,
   auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASSWORD,
+    user: emailId,
+    pass: password,
   },
 });
 
