@@ -64,7 +64,7 @@ exports.create = async (req, res) => {
           from: process.env.EMAIL,
           to: subscribers[i].email,
           subject: 'New Blog Added',
-          html: `<h5>Hi ${subscribers[i].email}</h5><p>New Blog Added.</p>`,
+          html: `<h5>Hi ${subscribers[i].email}</h5><p>New Blog Added. Please Check.</p>`,
         });
       }
     } else {

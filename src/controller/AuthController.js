@@ -259,6 +259,7 @@ exports.enableAdmin = async (req, res, next)=>{
     const _id = req.params.id;
     const enableAdmin = await User.findByIdAndUpdate({_id: _id}, {role_id: 1});
     if (enableAdmin) {
+      mailTemplate.promotedAdminNotification(enableAdmin.name, enableAdmin.email);
       res.status(200).json({success: true, message: 'User Promoted to Admin'});
     } else {
       res.status(404).json({success: false, message: message.dataNotFound});
