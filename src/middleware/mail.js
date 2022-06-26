@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const {emailId,password} = require('../../config/bootstrap');
+const {emailId, password} = require('../../config/bootstrap');
 
 const mailTransporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',

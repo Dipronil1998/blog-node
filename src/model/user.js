@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const {salt,secretKey} = require('../../config/bootstrap');
+const {salt, secretKey} = require('../../config/bootstrap');
 
 const UserSchema = new mongoose.Schema({
   role_id: {
