@@ -1,4 +1,5 @@
 const User = require('../model/user');
+const Role = require('../model/role');
 const Otp = require('../model/otp');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -257,9 +258,12 @@ exports.updateProfile = async (req, res)=>{
 exports.enableAdmin = async (req, res, next)=>{
   try {
     const _id = req.params.id;
-    const enableAdmin = await User.findByIdAndUpdate({_id: _id}, {role_id: 1});
+    const roleId = (await Role.find({slug: 'admin'}, {_id: 0, role_id: 1}))[0];
+    const enableAdmin = await User
+        .findByIdAndUpdate({_id: _id}, {role_id: roleId});
     if (enableAdmin) {
-      mailTemplate.promotedAdminNotification(enableAdmin.name, enableAdmin.email);
+      mailTemplate
+          .promotedAdminNotification(enableAdmin.name, enableAdmin.email);
       res.status(200).json({success: true, message: 'User Promoted to Admin'});
     } else {
       res.status(404).json({success: false, message: message.dataNotFound});
