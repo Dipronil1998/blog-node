@@ -16,8 +16,9 @@ const promotedAdminNotification = (name, email) =>{
     from: emailId,
     to: email,
     subject: 'Congratulations, Admin',
-    html: `<h5>Hi ${name}</h5><p>congratulations, You have an Adminstrative Power.</p>`,
+    html: `<h5>Hi ${name}</h5><p>congratulations, 
+      You have an Adminstrative Power.</p>`,
   });
 };
 
-module.exports = {mailOtp,promotedAdminNotification};
+module.exports = {mailOtp, promotedAdminNotification};

@@ -1,4 +1,4 @@
-const {dbPort} = require("../config/bootstrap");
+const {dbPort} = require('../config/bootstrap');
 const app = require('../config/app');
 port = dbPort || 3001;
 
