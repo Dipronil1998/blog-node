@@ -17,11 +17,11 @@ exports.create = async (req, res, next) => {
       res.status(400).json({message: 'Tag Already Exists'});
     }
   } catch (error) {
-    res.status(400).send(error);
+    next(error);
   }
 };
 
-exports.get = async (req, res) => {
+exports.get = async (req, res, next) => {
   try {
     const tag = await Tag.aggregate([
       {
@@ -48,11 +48,11 @@ exports.get = async (req, res) => {
       res.status(200).send(tag);
     }
   } catch (error) {
-    res.status(400).send(error);
+    next(error);
   }
 };
 
-exports.getOne = async (req, res) => {
+exports.getOne = async (req, res, next) => {
   try {
     const _id = req.params.id;
     const tag = await Tag.findById({_id: _id});
@@ -62,11 +62,11 @@ exports.getOne = async (req, res) => {
       res.status(200).send(tag);
     }
   } catch (error) {
-    res.status(400).send(error);
+    next(error);
   }
 };
 
-exports.update = async (req, res) => {
+exports.update = async (req, res, next) => {
   try {
     const _id = req.params.id;
     const name=req.body.name;
@@ -81,11 +81,11 @@ exports.update = async (req, res) => {
       res.status(200).json({'message': 'Tag Update Successfully'});
     }
   } catch (error) {
-    res.status(404).send(error);
+    next(error);
   }
 };
 
-exports.delete=async (req, res) => {
+exports.delete=async (req, res, next) => {
   try {
     const _id = req.params.id;
     const tag = await Tag.findByIdAndDelete({'_id': _id});
@@ -95,6 +95,6 @@ exports.delete=async (req, res) => {
       res.status(200).json({'message': 'Tag Delete Successfully'});
     }
   } catch (error) {
-    res.status(500).send(error);
+    next(error);
   }
 };

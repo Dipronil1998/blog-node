@@ -9,7 +9,7 @@ const message = require('../../config/constant');
 const sendMail = require('../middleware/mail');
 const fs = require('fs');
 
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
   try {
     const title = req.body.title;
     const body = req.body.body;
@@ -26,13 +26,16 @@ exports.create = async (req, res) => {
     const getCategory = await Category.find({slug: category.toLowerCase()});
     if (getCategory.length === 0) {
       fs.unlinkSync(image);
-      return res.status(404).json({status: false, message: 'Category Not Exists'});
+      return res.status(404)
+          .json({status: false, message: 'Category Not Exists'});
     }
     const getPost = await Post.findOne({slug: slug});
     if (!getPost) {
       if (req.user.role_id === 1) {
+        // eslint-disable-next-line
         is_approved = true;
       } else {
+        // eslint-disable-next-line
         is_approved = false;
       }
       const post = new Post({
@@ -42,6 +45,7 @@ exports.create = async (req, res) => {
         body: body,
         image: image,
         status: status,
+        // eslint-disable-next-line
         is_approved: is_approved,
       });
       await post.save();
@@ -57,14 +61,16 @@ exports.create = async (req, res) => {
         post_id: post._id,
         tag_id: getTag[0]._id,
       }).save();
-      res.status(201).json({status: true, message: 'Post Created Successfully'});
+      res.status(201)
+          .json({status: true, message: 'Post Created Successfully'});
       const subscribers = await Subscribers.find();
       for (i = 0; i < subscribers.length; i++) {
         sendMail({
           from: process.env.EMAIL,
           to: subscribers[i].email,
           subject: 'New Blog Added',
-          html: `<h5>Hi ${subscribers[i].email}</h5><p>New Blog Added. Please Check.</p>`,
+          html: `<h5>Hi ${subscribers[i].email}</h5>
+          <p>New Blog Added. Please Check.</p>`,
         });
       }
     } else {
@@ -72,7 +78,7 @@ exports.create = async (req, res) => {
       res.status(400).json({status: false, message: 'Post Already Exists'});
     }
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -86,7 +92,6 @@ exports.get = async (req, res, next) => {
     }
   } catch (error) {
     next();
-    console.log(error);
   }
 };
 
@@ -94,15 +99,22 @@ exports.getOne = async (req, res, next) => {
   try {
     const _id = req.params.id;
     const post = await Post.findById({_id: _id});
-    const postCategory = await CategoryPost.find({post_id: _id}).populate('category_id');
+    const postCategory = await CategoryPost
+        .find({post_id: _id}).populate('category_id');
     const postTag = await PostTag.find({post_id: _id}).populate('tag_id');
     if (!post) {
       res.status(400).json({success: false, message: message.dataNotFound});
     } else {
-      res.status(200).json({success: true, post: post, category: postCategory[0].category_id.name, tag: postTag[0].tag_id.name});
+      res.status(200)
+          .json({
+            success: true,
+            post: post,
+            category: postCategory[0].category_id.name,
+            tag: postTag[0].tag_id.name,
+          });
     }
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -115,7 +127,7 @@ exports.pending = async (req, res, next) => {
       res.status(200).json({success: true, message: pendingPost});
     }
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -127,14 +139,15 @@ exports.approved = async (req, res, next) => {
       res.status(400).json({success: false, message: message.dataNotFound});
     } else {
       if (post.is_approved == true) {
-        res.status(200).json({success: false, message: 'Post Already Approved'});
+        res.status(200)
+            .json({success: false, message: 'Post Already Approved'});
       } else {
         await Post.findByIdAndUpdate({_id: _id}, {is_approved: true});
-        res.status(200).json({success: true, message: 'Post Successfully Approved'});
+        res.status(200)
+            .json({success: true, message: 'Post Successfully Approved'});
       }
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };

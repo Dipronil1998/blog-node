@@ -2,7 +2,7 @@ const Category = require('../model/category');
 const message = require('../../config/constant');
 const fs = require('fs');
 
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
   try {
     const name = req.body.name;
     const image = req.file.path;
@@ -25,7 +25,7 @@ exports.create = async (req, res) => {
       res.status(400).json({status: false, message: 'Category Already Exists'});
     }
   } catch (error) {
-    res.status(500).send(error);
+    next(error);
   }
 };
 
@@ -57,12 +57,11 @@ exports.get = async (req, res, next) => {
       res.status(200).send(category);
     }
   } catch (error) {
-    // res.status(500).send(error);
     next(error);
   }
 };
 
-exports.getOne = async (req, res) => {
+exports.getOne = async (req, res, next) => {
   try {
     const _id = req.params.id;
     const category = await Category.findById({_id: _id});
@@ -72,11 +71,11 @@ exports.getOne = async (req, res) => {
       res.status(200).send(category);
     }
   } catch (error) {
-    res.status(500).send(error);
+    next(error);
   }
 };
 
-exports.update = async (req, res) => {
+exports.update = async (req, res, next) => {
   try {
     consol;
     const _id = req.params.id;
@@ -109,11 +108,11 @@ exports.update = async (req, res) => {
           });
     }
   } catch (error) {
-    res.status(400).send(error);
+    next(error);
   }
 };
 
-exports.delete = async (req, res) => {
+exports.delete = async (req, res, next) => {
   try {
     const _id = req.params.id;
     const category = await Category.findByIdAndDelete({_id: _id});
@@ -129,7 +128,7 @@ exports.delete = async (req, res) => {
           });
     }
   } catch (error) {
-    res.status(500).send(error);
+    next(error);
   }
 };
 

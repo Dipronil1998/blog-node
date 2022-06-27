@@ -48,14 +48,11 @@ exports.signUp = async (req, res, next) => {
       logger.error('User Already Exists');
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).json(error);
-    logger.error(error);
     next(error);
   }
 };
 
-exports.verifyOtp = async (req, res) => {
+exports.verifyOtp = async (req, res, next) => {
   try {
     const _id = req.params.id;
     const otp = req.body.otp;
@@ -72,12 +69,12 @@ exports.verifyOtp = async (req, res) => {
       logger.error('Your OTP is Invalid.');
     }
   } catch (error) {
-    res.status(400).json(error);
     logger.error(error);
+    next(error);
   }
 };
 
-exports.logIn = async (req, res) => {
+exports.logIn = async (req, res, next) => {
   try {
     // const errors = validationResult(req);
     // if (!errors.isEmpty()) {
@@ -123,12 +120,12 @@ exports.logIn = async (req, res) => {
       logger.error(message.userNotExists);
     }
   } catch (error) {
-    res.json({error: 'Invalid Email/Password'});
     logger.error('Invalid Email/Password');
+    next(error);
   }
 };
 
-exports.sendUserPasswordResetEmail = async (req, res) => {
+exports.sendUserPasswordResetEmail = async (req, res, next) => {
   try {
     const email = req.body.email;
     if (email) {
@@ -159,12 +156,12 @@ exports.sendUserPasswordResetEmail = async (req, res) => {
       res.send({message: 'Email Field is Required'});
     }
   } catch (error) {
-    res.json({error: 'Something Wrong'});
     logger.error('Something Wrong');
+    next(error);
   }
 };
 
-exports.userPasswordReset = async (req, res) => {
+exports.userPasswordReset = async (req, res, next) => {
   const {password, confirm_password} = req.body;
   const {id, token} = req.params;
   const user = await User.findById(id);
@@ -190,7 +187,7 @@ exports.userPasswordReset = async (req, res) => {
     }
   } catch (error) {
     looger.error('Invalid Token');
-    res.send({message: 'Invalid Token'});
+    next(error);
   }
 };
 
@@ -227,7 +224,7 @@ exports.changeUserPassword = async (req, res, next) => {
   }
 };
 
-exports.updateProfile = async (req, res)=>{
+exports.updateProfile = async (req, res, next)=>{
   try {
     const user = await User.findById(req.user._id);
     const oldProfilePic = user.image;
@@ -251,7 +248,7 @@ exports.updateProfile = async (req, res)=>{
           message: 'Profile Updated Successfully',
         });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
