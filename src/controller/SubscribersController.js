@@ -1,7 +1,7 @@
 const Subscribers = require('../model/subscribers');
 const message = require('../../config/constant');
 
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
   try {
     const email = req.body.email;
     const getEmail = await Subscribers.findOne({email: email});
@@ -18,11 +18,11 @@ exports.create = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).send(error);
+    next(error);
   }
 };
 
-exports.find = async (req, res) => {
+exports.find = async (req, res, next) => {
   try {
     const search = req.query.search;
     let subscribers;
@@ -37,11 +37,11 @@ exports.find = async (req, res) => {
       res.status(200).json(subscribers);
     }
   } catch (error) {
-    res.status(400).json(error);
+    next(error);
   }
 };
 
-exports.delete = async (req, res)=>{
+exports.delete = async (req, res, next)=>{
   try {
     const _id = req.params.id;
     const getSubcribers = await Subscribers.findByIdAndDelete({_id: _id});
@@ -56,6 +56,6 @@ exports.delete = async (req, res)=>{
           });
     }
   } catch (error) {
-    res.status(400).send(error);
+    next(error);
   }
 };
