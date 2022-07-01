@@ -5,7 +5,7 @@ const role = require('./SeedRole');
 db.dbConnect();
 try {
   require('./SeedUser');
-  // require('./SeedRole');
+  require('./SeedRole');
   role.run();
   setTimeout(()=>{
     console.log('Seeding Complete');
