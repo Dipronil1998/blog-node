@@ -6,7 +6,6 @@ db.dbConnect();
 try {
   require('./SeedUser');
   require('./SeedRole');
-  role.run();
   setTimeout(()=>{
     console.log('Seeding Complete');
     db.dbDisconnect();
