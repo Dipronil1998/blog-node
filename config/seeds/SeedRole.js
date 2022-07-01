@@ -1,26 +1,30 @@
 const Role = require('../../src/model/role');
 
-const roles = [
-  new Role({
-    role_id: 1,
-    name: 'Admin',
-    slug: 'admin',
-  }),
-  new Role({
-    role_id: 2,
-    name: 'Author',
-    slug: 'author',
-  }),
-];
+try {
+  const run = async () =>{
+    let roles = new Role();
+    roles.role_id = 1;
+    roles.name = 'Admin';
+    roles.slug = 'admin';
 
-
-roles.map(async (p, index) => {
-  await Role.deleteMany({slug: 'admin'});
-  await Role.deleteMany({slug: 'author'});
-  await p.save((err, result) => {
-    if (index === roles.length - 1) {
-      console.log('Role Seed Done');
-      // mongoose.disconnect();
+    let role = await Role.find({'slug': 'admin'});
+    if (role.length === 0) {
+      roles.save();
     }
-  });
-});
+
+    roles = new Role();
+    roles.role_id = 2;
+    roles.name = 'Author';
+    roles.slug = 'author';
+
+    role = await Role.find({'slug': 'author'});
+    if (role.length === 0) {
+      roles.save();
+    }
+  };
+  run();
+} catch (error) {
+  console.log(error);
+}
+
+// module.exports = {run}

@@ -1,30 +1,33 @@
 const User = require('../../src/model/user');
 
-const users = [
-  new User({
-    role_id: 1,
-    name: 'Mr. Admin',
-    email: 'admin@gmail.com',
-    account_verified: true,
-    password: '1234',
-  }),
-  new User({
-    role_id: 2,
-    name: 'Mr. Author',
-    email: 'author@gmail.com',
-    account_verified: true,
-    password: '1234',
-  }),
-];
+try {
+  const run = async () =>{
+    let users = new User();
+    users.role_id = 1;
+    users.name = 'Mr. Admin';
+    users.email = 'admin@gmail.com';
+    users.account_verified = true;
+    users.password = '1234';
 
-
-users.map(async (p, index) => {
-  await User.deleteMany({name: 'Mr. Admin'});
-  await User.deleteMany({name: 'Mr. Author'});
-  await p.save((err, result) => {
-    if (index === users.length - 1) {
-      console.log('User Seed Done');
-      // mongoose.disconnect();
+    let user = await User.find({'email': 'admin@gmail.com'});
+    if (user.length === 0) {
+      users.save();
     }
-  });
-});
+
+
+    users = new User();
+    users.role_id = 2;
+    users.name = 'Mr. Author';
+    users.email = 'author@gmail.com';
+    users.account_verified = true;
+    users.password = '1234';
+
+    user = await User.find({'email': 'author@gmail.com'});
+    if (user.length === 0) {
+      users.save();
+    }
+  };
+  run();
+} catch (error) {
+  console.log(error);
+}
