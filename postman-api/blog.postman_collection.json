@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\":\"Dipronil Das\",\n    \"email\":\"dipronildas.net@gmail.com\",\n    \"password\":\"Dip@12345\",\n    \"confirm_password\":\"Dip@12345\"\n}",
+					"raw": "{\n    \"name\":\"Dipronil Das\",\n    \"email\":\"dipronildas.net@gmail.com\",\n    \"password\":\"Dip@12345\",\n    \"confirmPassword\":\"Dip@12345\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,11 +20,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/auth/signup",
+					"raw": "{{host}}:{{port}}/auth/signup",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"auth",
 						"signup"
@@ -48,11 +48,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/auth/login",
+					"raw": "{{host}}:{{port}}/auth/login",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"auth",
 						"login"
@@ -94,11 +94,11 @@
 					]
 				},
 				"url": {
-					"raw": "localhost:3000/category",
+					"raw": "{{host}}:{{port}}/category",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"category"
 					]
@@ -118,11 +118,11 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/category",
+					"raw": "{{host}}:{{port}}/category",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"category"
 					]
@@ -142,11 +142,11 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/category/6224b25fe94feb5285edea8e",
+					"raw": "{{host}}:{{port}}/category/6224b25fe94feb5285edea8e",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"category",
 						"6224b25fe94feb5285edea8e"
@@ -176,11 +176,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/tags",
+					"raw": "{{host}}:{{port}}/tags",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"tags"
 					]
@@ -200,11 +200,11 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/tag/621e38239500becfee65ce2f",
+					"raw": "{{host}}:{{port}}/tag/621e38239500becfee65ce2f",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"tag",
 						"621e38239500becfee65ce2f"
@@ -232,11 +232,11 @@
 					"formdata": []
 				},
 				"url": {
-					"raw": "localhost:3000/tag",
+					"raw": "{{host}}:{{port}}/tag",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"tag"
 					]
@@ -265,11 +265,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/tag/621f6ba8092ef566af85ff9e",
+					"raw": "{{host}}:{{port}}/tag/621f6ba8092ef566af85ff9e",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"tag",
 						"621f6ba8092ef566af85ff9e"
@@ -300,11 +300,11 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/tag/621f6ba8092ef566af85ff9e",
+					"raw": "{{host}}:{{port}}/tag/621f6ba8092ef566af85ff9e",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"tag",
 						"621f6ba8092ef566af85ff9e"
@@ -328,11 +328,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/auth/forgotpassword",
+					"raw": "{{host}}:{{port}}/auth/forgotpassword",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"auth",
 						"forgotpassword"
@@ -356,11 +356,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/auth/resetpassword/62237c0b16317d678e1974ca/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJpYXQiOjE2NDY0OTQxMzIsImV4cCI6MTY0NjQ5NTAzMn0.iqsVIlOgDF5K_gHai9jQsJvMTzTP_xNZ0EAIyFybrzA",
+					"raw": "{{host}}:{{port}}/auth/resetpassword/62237c0b16317d678e1974ca/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MjIzN2MwYjE2MzE3ZDY3OGUxOTc0Y2EiLCJpYXQiOjE2NDY0OTQxMzIsImV4cCI6MTY0NjQ5NTAzMn0.iqsVIlOgDF5K_gHai9jQsJvMTzTP_xNZ0EAIyFybrzA",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"auth",
 						"resetpassword",
@@ -399,11 +399,11 @@
 					]
 				},
 				"url": {
-					"raw": "localhost:3000/category/62681fa97f524351ebc8db21",
+					"raw": "{{host}}:{{port}}/category/62681fa97f524351ebc8db21",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"category",
 						"62681fa97f524351ebc8db21"
@@ -424,11 +424,11 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/category/6268199076646e0ca97326c8",
+					"raw": "{{host}}:{{port}}/category/6268199076646e0ca97326c8",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"category",
 						"6268199076646e0ca97326c8"
@@ -444,7 +444,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"otp\":\"839010\"\n}",
+					"raw": "{\n    \"otp\":\"245687\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -452,15 +452,15 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/auth/verifyotp/62a21f4fe23450821b913f19",
+					"raw": "{{host}}:{{port}}/auth/verifyotp/62b6af0dc2adda4f1033db4a",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"auth",
 						"verifyotp",
-						"62a21f4fe23450821b913f19"
+						"62b6af0dc2adda4f1033db4a"
 					]
 				}
 			},
@@ -487,11 +487,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/auth/changepassword",
+					"raw": "{{host}}:{{port}}/auth/changepassword",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"auth",
 						"changepassword"
@@ -528,11 +528,11 @@
 					]
 				},
 				"url": {
-					"raw": "localhost:3000/auth/updateprofile",
+					"raw": "{{host}}:{{port}}/auth/updateprofile",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"auth",
 						"updateprofile"
@@ -593,11 +593,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/post",
+					"raw": "{{host}}:{{port}}/post",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"post"
 					]
@@ -620,11 +620,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/subscribers",
+					"raw": "{{host}}:{{port}}/subscribers",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"subscribers"
 					]
@@ -644,11 +644,11 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/subscribers/626d2d8a58470bbcdbf005d4",
+					"raw": "{{host}}:{{port}}/subscribers/626d2d8a58470bbcdbf005d4",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"subscribers",
 						"626d2d8a58470bbcdbf005d4"
@@ -669,11 +669,11 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/subscribers?search=dipronildas.net@gmail.com",
+					"raw": "{{host}}:{{port}}/subscribers?search=dipronildas.net@gmail.com",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"subscribers"
 					],
@@ -699,11 +699,11 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/post",
+					"raw": "{{host}}:{{port}}/post",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"post"
 					]
@@ -723,11 +723,11 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/post/6280ffbb7d5aa9b9c41704f3",
+					"raw": "{{host}}:{{port}}/post/6280ffbb7d5aa9b9c41704f3",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"post",
 						"6280ffbb7d5aa9b9c41704f3"
@@ -748,11 +748,11 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/post/pending/post",
+					"raw": "{{host}}:{{port}}/post/pending/post",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"post",
 						"pending",
@@ -774,11 +774,11 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/post/6283e20c32d00aff048adb5e/approve",
+					"raw": "{{host}}:{{port}}/post/6283e20c32d00aff048adb5e/approve",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"post",
 						"6283e20c32d00aff048adb5e",
@@ -800,15 +800,15 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:3000/auth/enableadmin/626cdcb84ec673384c485745",
+					"raw": "{{host}}:{{port}}/auth/enableadmin/62b6af0dc2adda4f1033db4a",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3000",
+					"port": "{{port}}",
 					"path": [
 						"auth",
 						"enableadmin",
-						"626cdcb84ec673384c485745"
+						"62b6af0dc2adda4f1033db4a"
 					]
 				}
 			},
