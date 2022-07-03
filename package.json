@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "env-cmd -f ./config/test.env jest",
-    "test-watch": "env-cmd -f ./config/test.env jest --watch",
-    "test-cover": "env-cmd -f ./config/test.env jest --coverage",
+    "test": "NODE_ENV=test jest",
+    "test-watch": "NODE_ENV=test jest --watch",
+    "test-cover": "NODE_ENV=test jest --coverage",
     "dev":"NODE_ENV=development node ./src/index.js",
     "start": "NODE_ENV=development nodemon ./src/index.js",
     "seed": "NODE_ENV=development node ./config/seeds/seed.js",

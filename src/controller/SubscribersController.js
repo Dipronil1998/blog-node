@@ -1,5 +1,6 @@
 const Subscribers = require('../model/subscribers');
 const message = require('../../config/constant');
+const ResponseService = require('../service/ResponseService');
 
 exports.create = async (req, res, next) => {
   try {
@@ -10,10 +11,7 @@ exports.create = async (req, res, next) => {
         email: email,
       });
       await subscriber.save();
-      res.status(201).json({
-        success: true,
-        message: 'Email Subscription Added',
-      });
+      ResponseService.sendSuccessResponse(res, message.emailSubscriptionAdded);
     } else {
       res.status(400).json({
         success: false,
@@ -37,7 +35,7 @@ exports.find = async (req, res, next) => {
     if (subscribers.length === 0) {
       res.status(400).json({success: false, message: message.dataNotFound});
     } else {
-      res.status(200).json(subscribers);
+      ResponseService.sendSuccessResponse(res, subscribers);
     }
   } catch (error) {
     next(error);
