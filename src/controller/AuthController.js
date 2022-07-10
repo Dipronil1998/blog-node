@@ -89,8 +89,6 @@ exports.logIn = async (req, res, next) => {
         const isValid = await bcrypt.compare(password, emailuser.password);
         const token = await emailuser.generateAuthToken();
         if (isValid) {
-          await User.findOneAndUpdate({email: email},
-              {current_sign_in_at: Date.now()});
           res
               .status(200)
               .json({
@@ -99,6 +97,7 @@ exports.logIn = async (req, res, next) => {
                 token: token,
               });
           logger.info(message.loginSuccessfully);
+          next()
         } else {
           res.status(400)
               .json({
@@ -124,6 +123,16 @@ exports.logIn = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.currentSignInAt = async (req, res, next) => {
+  try {
+    const email = req.body.email;
+    await User.findOneAndUpdate({email: email},
+          {current_sign_in_at: Date.now()});
+  } catch (error) {
+    next(error)
+  }
+}
 
 exports.sendUserPasswordResetEmail = async (req, res, next) => {
   try {
