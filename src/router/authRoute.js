@@ -35,7 +35,8 @@ router.post(
 
 router.put('/verifyotp/:id', authController.verifyOtp);
 
-router.post('/login', [authValidator.logInValidator], authController.logIn);
+router.post('/login', [authValidator.logInValidator], authController.logIn,
+  authController.currentSignInAt);
 
 router.post('/forgotpassword', authValidator.forgotPasswordValidator,
     validateResult, authController.sendUserPasswordResetEmail);
