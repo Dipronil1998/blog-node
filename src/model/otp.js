@@ -15,11 +15,12 @@ const otpSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  createdAt: {type: String, default: moment().format('hh:mm:ss')},
   expairAt: {
     type: String,
     default: moment().add(10, 'minutes').format('hh:mm:ss'),
   },
+}, {
+  timestamps: true,
 });
 
 // eslint-disable-next-line
