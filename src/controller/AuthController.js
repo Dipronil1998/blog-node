@@ -61,7 +61,7 @@ exports.verifyOtp = async (req, res, next) => {
       moment().format('hh:mm:ss')<=otpInfo.expairAt) {
       await User.findByIdAndUpdate({_id: _id}, {account_verified: true});
       await Otp.updateOne({user_id: _id},
-          {expairAt: moment().format('hh:mm:ss')});
+          {expairAt: moment(new Date()).format('DD/MM/YYYY hh:mm:ss')});
       res.status(200).json({status: true, message: message.createSuccessfull});
       logger.info(message.createSuccessfull);
     } else {
